@@ -1,0 +1,26 @@
+name: .NET
+
+on: push
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Setup MSBuild.exe
+      uses: warrenbuckley/Setup-MSBuild@v1
+    - name: Build MvvmMicro
+      run: msbuild -p:Configuration=Release -t:MvvmMicro:pack -restore
+    - name: Upload build results
+      uses: actions/upload-artifact@v1
+      with:
+        name: MvvmMicro
+        path: MvvmMicro/bin/Release
+    - name: Build MvvmMicro.Sample.Wpf
+      run: msbuild -p:Configuration=Release -t:MvvmMicro_Sample_Wpf:rebuild -restore
+    - name: Upload build results
+      uses: actions/upload-artifact@v1
+      with:
+        name: MvvmMicro.Sample.Wpf
+        path: MvvmMicro.Sample.Wpf/bin/Release
