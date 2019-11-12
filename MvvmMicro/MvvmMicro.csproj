@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <AssemblyName>PlaidSoft.MvvmMicro</AssemblyName>
+    <RootNamespace>PlaidSoft.MvvmMicro</RootNamespace>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageId>MvvmMicro</PackageId>
+    <Company>PlaidSoft</Company>
+    <Authors>Yaroslav Bugaria</Authors>
+    <Product>MvvmMicro</Product>
+    <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired my MVVM Light Toolkit.</Description>
+    <Copyright>(c) Yaroslav Bugaria, 2019</Copyright>
+    <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>mvvm wpf uwp xamarin-forms</PackageTags>
+  </PropertyGroup>
+
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+
+</Project>
