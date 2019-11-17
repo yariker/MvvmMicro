@@ -14,8 +14,8 @@ namespace PlaidSoft.MvvmMicro
     ///     </item>
     ///     <item>
     ///         <description>
-    ///             The subscribers are kept as weak references, which allows garbage collection even without
-    ///             <see cref="Unsubscribe(object)"/>.
+    ///             The subscribers are kept as weak references, which allows them to be garbage collected
+    ///             even without an explicit <see cref="Unsubscribe(object)"/> call.
     ///         </description>
     ///     </item>
     ///     <item>
