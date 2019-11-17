@@ -24,9 +24,10 @@ jobs:
       with:
         name: samples
         path: MvvmMicro.Sample.Wpf
+    - uses: warrenbuckley/Setup-Nuget@v1
     - name: Publish
       shell: cmd
-      run: dotnet push package\*.nupkg --source https://www.nuget.org --api-key %NUGET_API_KEY%
+      run: nuget push package\*.nupkg --source https://www.nuget.org --api-key %NUGET_API_KEY%
     - name: Create Release
       id: create_release
       uses: actions/create-release@v1.0.0
