@@ -9,6 +9,8 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: warrenbuckley/Setup-MSBuild@v1
+    - uses: actions/setup-dotnet@v1.0.0
     - name: Build & Pack
       run: msbuild -p:Configuration=Release -t:MvvmMicro_Sample_Wpf:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF:v=%
     - name: Upload binaries
