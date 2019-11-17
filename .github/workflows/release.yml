@@ -7,17 +7,13 @@ on:
 jobs:
   build:
     runs-on: windows-latest
-    env:
-      GITHUB_REF: ${{ github.ref }}
-      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
     - uses: actions/checkout@v1
     - uses: warrenbuckley/Setup-MSBuild@v1
     - uses: actions/setup-dotnet@v1.0.0
     - name: Build & Pack
-      run: |
-        set
-        msbuild -p:Configuration=Release -t:MvvmMicro_Sample_Wpf:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF%
+      shell: cmd
+      run: msbuild -p:Configuration=Release -t:MvvmMicro_Sample_Wpf:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF:v=%
     - name: Upload binaries
       uses: actions/upload-artifact@v1
       with:
@@ -29,6 +25,7 @@ jobs:
         name: samples
         path: MvvmMicro.Sample.Wpf
     - name: Publish
+      shell: cmd
       run: dotnet push package\*.nupkg --source https://www.nuget.org --api-key %NUGET_API_KEY%
     - name: Create Release
       id: create_release
