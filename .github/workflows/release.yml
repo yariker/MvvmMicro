@@ -7,6 +7,9 @@ on:
 jobs:
   build:
     runs-on: windows-latest
+    env:
+      GITHUB_REF: ${{ github.ref }}
+      NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
     steps:
     - uses: actions/checkout@v1
     - uses: warrenbuckley/Setup-MSBuild@v1
