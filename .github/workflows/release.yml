@@ -1,0 +1,41 @@
+name: Release
+
+on:
+  push:
+    tags: 'v*'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build & Pack
+      run: msbuild -p:Configuration=Release -t:MvvmMicro_Sample_Wpf:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF:v=%
+    - name: Upload binaries
+      uses: actions/upload-artifact@v1
+      with:
+        name: binaries
+        path: MvvmMicro/bin/Release
+    - name: Upload samples
+      uses: actions/upload-artifact@v1
+      with:
+        name: samples
+        path: MvvmMicro.Sample.Wpf
+    - name: Publish
+      run: dotnet push package\*.nupkg --source https://www.nuget.org --api-key %NUGET_API_KEY%
+    - name: Create Release
+      id: create_release
+      uses: actions/create-release@v1.0.0
+      with:
+        tag_name: ${{ github.ref }}
+        release_name: Release ${{ github.ref }}
+        draft: true
+        prerelease: ${{ contains(github.ref, '-') }}
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1.0.1
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: binaries.zip
+        asset_name: binaries.zip
+        asset_content_type: application/zip

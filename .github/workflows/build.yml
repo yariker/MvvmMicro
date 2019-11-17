@@ -1,0 +1,19 @@
+name: Build
+
+on:
+  push:
+    tags-ignore: 'v*'
+
+jobs:
+  build:
+    name: Build
+    runs-on: windows-latest
+    steps:
+    - uses: actions/checkout@v1
+    - name: Build
+      run: msbuild -p:Configuration=Release -t:rebuild -restore
+    - name: Upload binaries
+      uses: actions/upload-artifact@v1
+      with:
+        name: binaries
+        path: MvvmMicro/bin/Release
