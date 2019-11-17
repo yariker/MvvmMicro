@@ -12,7 +12,6 @@
         WindowStartupLocation="CenterScreen"
         Background="Black"
         Loaded="Window_Loaded"
-        Unloaded="Window_Unloaded"
         DataContext="{Binding Main, Source={StaticResource Locator}}">
 
     <b:Interaction.Triggers>

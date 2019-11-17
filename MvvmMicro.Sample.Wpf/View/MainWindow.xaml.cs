@@ -15,18 +15,13 @@ namespace PlaidSoft.MvvmMicro.Sample.NetFx.View
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            SimpleMessenger.Default.Subscribe<string>(message =>
+            SimpleMessenger.Default.Subscribe<string>(this, message =>
             {
                 if (message == Notifications.CloseWindow)
                 {
                     Close();
                 }
             });
-        }
-
-        private void Window_Unloaded(object sender, RoutedEventArgs e)
-        {
-            SimpleMessenger.Default.Unsubscribe(this);
         }
     }
 }

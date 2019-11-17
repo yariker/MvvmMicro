@@ -14,8 +14,8 @@ namespace PlaidSoft.MvvmMicro
     ///     </item>
     ///     <item>
     ///         <description>
-    ///             The callbacks are kept as weak references. Subscribers should keep a strong reference
-    ///             to their callback to avoid it being garbage collected.
+    ///             The subscribers are kept as weak references, which allows garbage collection even without
+    ///             <see cref="Unsubscribe(object)"/>.
     ///         </description>
     ///     </item>
     ///     <item>
@@ -51,7 +51,7 @@ namespace PlaidSoft.MvvmMicro
                 {
                     if (entry.Key.IsAssignableFrom(type))
                     {
-                        callbacks.AddRange(entry.Value.GetCallbacks());
+                        entry.Value.GetCallbacks(callbacks);
                     }
                 }
             }
@@ -63,8 +63,12 @@ namespace PlaidSoft.MvvmMicro
         }
 
         /// <inheritdoc />
-        public void Subscribe<T>(Action<T> callback)
+        public void Subscribe<T>(object subscriber, Action<T> callback)
         {
+            if (subscriber is null)
+            {
+                throw new ArgumentNullException(nameof(subscriber));
+            }
             if (callback is null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -78,7 +82,7 @@ namespace PlaidSoft.MvvmMicro
                     _registry.Add(type, channel = new Channel());
                 }
 
-                channel.Subscribe(callback);
+                channel.Subscribe(subscriber, callback);
             }
         }
 
@@ -107,12 +111,12 @@ namespace PlaidSoft.MvvmMicro
             private readonly ConditionalWeakTable<object, List<Delegate>> _callbacks =
                 new ConditionalWeakTable<object, List<Delegate>>();
 
-            public void Subscribe(Delegate callback)
+            public void Subscribe(object subscriber, Delegate callback)
             {
-                if (!_callbacks.TryGetValue(callback.Target, out List<Delegate> callbacks))
+                if (!_callbacks.TryGetValue(subscriber, out List<Delegate> callbacks))
                 {
-                    _subscribers.Add(new WeakReference<object>(callback.Target));
-                    _callbacks.Add(callback.Target, callbacks = new List<Delegate>());
+                    _subscribers.Add(new WeakReference<object>(subscriber));
+                    _callbacks.Add(subscriber, callbacks = new List<Delegate>());
                 }
 
                 callbacks.Add(callback);
@@ -133,17 +137,18 @@ namespace PlaidSoft.MvvmMicro
                 }
             }
 
-            public IEnumerable<Delegate> GetCallbacks()
+            public void GetCallbacks(List<Delegate> list)
             {
-                foreach (WeakReference<object> reference in _subscribers)
+                for (int i = _subscribers.Count - 1; i >= 0; i--)
                 {
-                    if (reference.TryGetTarget(out object subscriber) &&
+                    if (_subscribers[i].TryGetTarget(out object subscriber) && 
                         _callbacks.TryGetValue(subscriber, out List<Delegate> callbacks))
                     {
-                        foreach (Delegate callback in callbacks)
-                        {
-                            yield return callback;
-                        }
+                        list.AddRange(callbacks);
+                    }
+                    else
+                    {
+                        _subscribers.RemoveAt(i);
                     }
                 }
             }

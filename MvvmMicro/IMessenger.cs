@@ -20,11 +20,9 @@ namespace PlaidSoft.MvvmMicro
         /// <typeparam name="T">
         /// The type of the message to listen, including the types derived from <typeparamref name="T"/>.
         /// </typeparam>
-        /// <param name="callback">
-        /// The callback to invoke when a message is delivered.
-        /// The callback's <see cref="Delegate.Target"/> becomes a subscriber. 
-        /// </param>
-        void Subscribe<T>(Action<T> callback);
+        /// <param name="subscriber">The subscriber to register.</param>
+        /// <param name="callback">The callback to invoke when a message is delivered.</param>
+        void Subscribe<T>(object subscriber, Action<T> callback);
 
         /// <summary>
         /// Removes all callbacks registered by the given subscriber.
