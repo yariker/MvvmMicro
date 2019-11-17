@@ -10,6 +10,7 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
+    - uses: warrenbuckley/Setup-MSBuild@v1
     - name: Build
       run: msbuild -p:Configuration=Release -t:rebuild -restore
     - name: Upload binaries
