@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro", "MvvmMicro\Mvvm
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmMicro.Sample.Wpf", "MvvmMicro.Sample.Wpf\MvvmMicro.Sample.Wpf.csproj", "{BBFB5394-E5FC-421F-B527-B08E79BF6AF4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmMicro.Test", "MvvmMicro.Test\MvvmMicro.Test.csproj", "{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{BBFB5394-E5FC-421F-B527-B08E79BF6AF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BBFB5394-E5FC-421F-B527-B08E79BF6AF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BBFB5394-E5FC-421F-B527-B08E79BF6AF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -19,6 +19,8 @@
     <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>mvvm wpf uwp xamarin-forms</PackageTags>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
   </PropertyGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">

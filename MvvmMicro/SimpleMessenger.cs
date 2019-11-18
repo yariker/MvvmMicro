@@ -56,9 +56,18 @@ namespace PlaidSoft.MvvmMicro
                 }
             }
 
-            foreach (Action<T> callback in callbacks)
+            foreach (Delegate callback in callbacks)
             {
-                callback(message);
+                switch (callback)
+                {
+                    case Action<T> action:
+                        action(message);
+                        break;
+                    default:
+                        // TODO: Optimize this.
+                        callback.DynamicInvoke(message);
+                        break;
+                }
             }
         }
 
