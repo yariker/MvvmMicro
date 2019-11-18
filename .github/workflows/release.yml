@@ -18,7 +18,7 @@ jobs:
       shell: cmd
       run: msbuild -p:Configuration=Release -t:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF:refs/tags/v=%
     - name: Test
-      run: dotnet test --configuration Release --no-build -verbosity normal
+      run: dotnet test --configuration Release --no-build --verbosity normal
     - name: Upload binaries
       uses: actions/upload-artifact@v1
       with:
