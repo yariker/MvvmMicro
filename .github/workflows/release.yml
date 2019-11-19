@@ -14,49 +14,18 @@ jobs:
     - uses: actions/checkout@v1
     - uses: warrenbuckley/Setup-MSBuild@v1
     - uses: actions/setup-dotnet@v1.0.0
-    - name: Build and Pack
-      shell: cmd
-      run: msbuild -p:Configuration=Release -t:rebuild -t:MvvmMicro:pack -p:PackageOutputPath=%cd%\package -restore -p:Version=%GITHUB_REF:refs/tags/v=%
-    - name: Test
-      run: dotnet test --configuration Release --no-build --verbosity normal
+    - name: Build
+      run: .\build.ps1 -Version $Env:GITHUB_REF.Replace('refs/tags/v', '') -Pack
     - name: Upload binaries
       uses: actions/upload-artifact@v1
       with:
         name: binaries
-        path: MvvmMicro/bin/Release
-    - name: Upload samples
+        path: src/MvvmMicro/bin/Release    
+    - name: Upload package
       uses: actions/upload-artifact@v1
       with:
-        name: samples
-        path: MvvmMicro.Sample.Wpf
+        name: package
+        path: package
     - uses: warrenbuckley/Setup-Nuget@v1
-    - name: Publish
-      shell: cmd
-      run: nuget push package\*.nupkg -source https://www.nuget.org -apikey %NUGET_API_KEY%
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1.0.0
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        prerelease: ${{ contains(github.ref, '-rc') }}
-        draft: true
-    - name: Pack Release Assets
-      run: |
-        Compress-Archive MvvmMicro/bin/Release/* binaries.zip
-        Remove-Item **\bin, **\obj -Recurse -Force
-        Get-Item MvvmMicro* | Compress-Archive -DestinationPath samples.zip
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1.0.1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: binaries.zip
-        asset_name: binaries.zip
-        asset_content_type: application/zip
-    - name: Upload Release Asset
-      uses: actions/upload-release-asset@v1.0.1
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: samples.zip
-        asset_name: samples.zip
-        asset_content_type: application/zip
+    - name: Publish package
+      run: nuget push package\*.nupkg -source https://www.nuget.org -apikey $Env:NUGET_API_KEY
