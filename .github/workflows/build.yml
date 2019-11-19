@@ -6,6 +6,7 @@ on:
       - '*.sln'
       - samples/**
       - src/**
+      - .github/workflows/build.yml
     tags-ignore: 'v*'
 
 jobs:
