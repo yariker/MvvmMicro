@@ -3,7 +3,7 @@ name: Build
 on:
   push:
     branches:
-      - '*'
+      - '**'
     paths:
       - '*.sln'
       - samples/**
@@ -18,7 +18,7 @@ jobs:
     - uses: actions/checkout@v1
     - uses: warrenbuckley/Setup-MSBuild@v1
     - uses: actions/setup-dotnet@v1.0.0
-    - name: Build
+    - name: Build and Test
       run: .\build.ps1 -Version ("$(git describe --abbrev=0 --tags)".TrimStart('v').TrimEnd('-rc') + '-dev')
     - name: Upload binaries
       uses: actions/upload-artifact@v1
