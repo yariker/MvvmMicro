@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace PlaidSoft.MvvmMicro
+namespace Takesoft.MvvmMicro
 {
     /// <summary>
     /// An <see cref="ICommand"/> with an asynchronous <see cref="Task"/>-based delegate, which prevents

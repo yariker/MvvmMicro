@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace PlaidSoft.MvvmMicro
+namespace Takesoft.MvvmMicro
 {
     /// <summary>
     /// A basic implementation of <see cref="IMessenger"/> with the following characteristics:

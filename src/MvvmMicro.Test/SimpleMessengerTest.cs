@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 
-namespace PlaidSoft.MvvmMicro.Test
+namespace Takesoft.MvvmMicro.Test
 {
     public class SimpleMessengerTest
     {
@@ -96,10 +96,10 @@ namespace PlaidSoft.MvvmMicro.Test
             subscriber1.Verify(s => s.Callback(message1), Times.Once);
             subscriber1.Verify(s => s.Callback(message2), Times.Once);
             subscriber1.Verify(s => s.Callback(message3), Times.Once);
-           
+
             subscriber2.Verify(s => s.Callback(It.IsAny<string>()), Times.Once);
             subscriber2.Verify(s => s.Callback(message2), Times.Once);
- 
+
             subscriber3.Verify(s => s.Callback(It.IsAny<int>()), Times.Once);
             subscriber3.Verify(s => s.Callback(message3), Times.Once);
         }
@@ -109,8 +109,8 @@ namespace PlaidSoft.MvvmMicro.Test
         {
             var messenger = new SimpleMessenger();
             Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Unsubscribe(null));
-        }        
-        
+        }
+
         [Fact]
         public void Unsubscribe_Shold_Unregister_Subscriber_Callbacks()
         {

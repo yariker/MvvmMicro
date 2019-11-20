@@ -4,7 +4,7 @@ using System.Text;
 using Moq;
 using Xunit;
 
-namespace PlaidSoft.MvvmMicro.Test
+namespace Takesoft.MvvmMicro.Test
 {
     public class ViewModelBaseTest : ViewModelBase
     {

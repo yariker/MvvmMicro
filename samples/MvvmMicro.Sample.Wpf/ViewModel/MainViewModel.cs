@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using PlaidSoft.MvvmMicro.Sample.NetFx.Model;
-using PlaidSoft.MvvmMicro.Sample.NetFx.Services;
+using Takesoft.MvvmMicro.Sample.NetFx.Model;
+using Takesoft.MvvmMicro.Sample.NetFx.Services;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.ViewModel
+namespace Takesoft.MvvmMicro.Sample.NetFx.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {

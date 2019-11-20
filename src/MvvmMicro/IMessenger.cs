@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlaidSoft.MvvmMicro
+namespace Takesoft.MvvmMicro
 {
     /// <summary>
     /// Defines an interface for a publish-subscribe message broker.

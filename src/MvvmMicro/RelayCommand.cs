@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace PlaidSoft.MvvmMicro
+namespace Takesoft.MvvmMicro
 {
     /// <summary>
     /// An <see cref="ICommand"/> whose delegates do not take any parameters for 

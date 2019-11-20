@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.Model
+namespace Takesoft.MvvmMicro.Sample.NetFx.Model
 {
     public class Picture
     {

@@ -1,10 +1,10 @@
-﻿using PlaidSoft.MvvmMicro.Sample.NetFx.Model;
-using PlaidSoft.MvvmMicro.Sample.NetFx.Services;
+﻿using Takesoft.MvvmMicro.Sample.NetFx.Model;
+using Takesoft.MvvmMicro.Sample.NetFx.Services;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.Design
+namespace Takesoft.MvvmMicro.Sample.NetFx.Design
 {
     public class CatFactFeed : ICatFactFeed
     {

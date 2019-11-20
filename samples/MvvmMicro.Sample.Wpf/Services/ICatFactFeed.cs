@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using PlaidSoft.MvvmMicro.Sample.NetFx.Model;
+using Takesoft.MvvmMicro.Sample.NetFx.Model;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.Services
+namespace Takesoft.MvvmMicro.Sample.NetFx.Services
 {
     public interface ICatFactFeed
     {

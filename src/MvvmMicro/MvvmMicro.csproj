@@ -2,14 +2,14 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <AssemblyName>PlaidSoft.MvvmMicro</AssemblyName>
-    <RootNamespace>PlaidSoft.MvvmMicro</RootNamespace>
+    <AssemblyName>Takesoft.MvvmMicro</AssemblyName>
+    <RootNamespace>Takesoft.MvvmMicro</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>MvvmMicro</PackageId>
     <PackageIcon>icon.png</PackageIcon>
-    <Company>PlaidSoft</Company>
+    <Company>Takesoft</Company>
     <Authors>Yaroslav Bugaria</Authors>
     <Product>MvvmMicro</Product>
     <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired my MVVM Light Toolkit.</Description>

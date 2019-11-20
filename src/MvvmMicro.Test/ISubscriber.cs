@@ -1,4 +1,4 @@
-﻿namespace PlaidSoft.MvvmMicro.Test
+﻿namespace Takesoft.MvvmMicro.Test
 {
     public interface ISubscriber<T>
     {

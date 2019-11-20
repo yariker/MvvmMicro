@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlaidSoft.MvvmMicro
+namespace Takesoft.MvvmMicro
 {
     /// <summary>
     /// Provides the base class for a view model.

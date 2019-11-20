@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{BBFB5394-E5FC-421F-B527-B08E79BF6AF4}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>PlaidSoft.MvvmMicro.Sample.Wpf</RootNamespace>
-    <AssemblyName>PlaidSoft.MvvmMicro.Sample.Wpf</AssemblyName>
+    <RootNamespace>Takesoft.MvvmMicro.Sample.Wpf</RootNamespace>
+    <AssemblyName>Takesoft.MvvmMicro.Sample.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
