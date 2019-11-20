@@ -12,7 +12,7 @@
     <Company>Takesoft</Company>
     <Authors>Yaroslav Bugaria</Authors>
     <Product>MvvmMicro</Product>
-    <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired my MVVM Light Toolkit.</Description>
+    <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired by MVVM Light Toolkit.</Description>
     <Copyright>(c) Yaroslav Bugaria, $([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
