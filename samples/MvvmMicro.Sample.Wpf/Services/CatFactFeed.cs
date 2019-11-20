@@ -4,9 +4,9 @@ using System.Diagnostics;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Takesoft.MvvmMicro.Sample.NetFx.Model;
+using PlaidSoft.MvvmMicro.Sample.NetFx.Model;
 
-namespace Takesoft.MvvmMicro.Sample.NetFx.Services
+namespace PlaidSoft.MvvmMicro.Sample.NetFx.Services
 {
     public sealed class CatFactFeed : ICatFactFeed, IDisposable
     {

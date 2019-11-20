@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace Takesoft.MvvmMicro.Sample.NetFx.Services
+namespace PlaidSoft.MvvmMicro.Sample.NetFx.Services
 {
     public static class HttpClientExtensions
     {

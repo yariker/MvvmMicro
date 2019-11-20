@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.Properties {
+namespace PlaidSoft.MvvmMicro.Sample.Wpf.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
