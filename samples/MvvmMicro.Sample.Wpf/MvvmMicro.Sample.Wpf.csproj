@@ -108,7 +108,7 @@
       <Version>1.1.3</Version>
     </PackageReference>
     <PackageReference Include="MvvmMicro">
-      <Version>0.9.0-rc</Version>
+      <Version>0.9.1-rc</Version>
     </PackageReference>
     <PackageReference Include="Newtonsoft.Json">
       <Version>12.0.3</Version>
