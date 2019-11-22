@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using PlaidSoft.MvvmMicro.Sample.NetFx.ViewModel;
+using Takesoft.MvvmMicro.Sample.Wpf.ViewModel;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx
+namespace Takesoft.MvvmMicro.Sample.Wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

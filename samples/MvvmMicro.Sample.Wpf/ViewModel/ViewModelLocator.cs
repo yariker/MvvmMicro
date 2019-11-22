@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
-using PlaidSoft.MvvmMicro.Sample.NetFx.Services;
+using Takesoft.MvvmMicro.Sample.Wpf.Services;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.ViewModel
+namespace Takesoft.MvvmMicro.Sample.Wpf.ViewModel
 {
     public sealed class ViewModelLocator : IDisposable
     {

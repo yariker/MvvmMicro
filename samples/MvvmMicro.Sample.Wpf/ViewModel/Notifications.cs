@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.ViewModel
+namespace Takesoft.MvvmMicro.Sample.Wpf.ViewModel
 {
     public static class Notifications
     {

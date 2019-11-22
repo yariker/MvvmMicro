@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace PlaidSoft.MvvmMicro.Sample.NetFx.Model
+namespace Takesoft.MvvmMicro.Sample.Wpf.Model
 {
     public class Fact
     {
