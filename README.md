@@ -4,7 +4,7 @@
 A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired by MVVM Light Toolkit.
 
 ## Goals
-- No third party dependencies, such as `CommonServiceLocator` and `System.Windows.Interactivity`.
+- No third party dependencies, such as `CommonServiceLocator` or `System.Windows.Interactivity`.
 - Avoid [feature kreep](https://en.wikipedia.org/wiki/Feature_creep) – only core MVVM types and services are included, such as `RelayCommand`, `ObservableObject` and a simple `IMessenger`.
 - Maintain clean, high quality code base.
 
