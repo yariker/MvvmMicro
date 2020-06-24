@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
     public interface IEventHandler
     {

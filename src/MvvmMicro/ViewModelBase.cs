@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Takesoft.MvvmMicro
+namespace MvvmMicro
 {
     /// <summary>
     /// Provides the base class for a view model.
@@ -13,12 +13,12 @@ namespace Takesoft.MvvmMicro
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
         /// </summary>
         /// <param name="messenger">
-        /// A custom messenger to be used by this view model. If <c>null</c>, then <see cref="SimpleMessenger.Default"/>
+        /// A custom messenger to be used by this view model. If <c>null</c>, then <see cref="MvvmMicro.Messenger.Default"/>
         /// will be used instead.
         /// </param>
         public ViewModelBase(IMessenger messenger = null)
         {
-            Messenger = messenger ?? SimpleMessenger.Default;
+            Messenger = messenger ?? MvvmMicro.Messenger.Default;
         }
 
         /// <summary>
@@ -50,7 +50,7 @@ namespace Takesoft.MvvmMicro
             var xamarin = Type.GetType("Xamarin.Forms.DesignMode, Xamarin.Forms.Core");
             if (xamarin != null)
             {
-                return (bool)uwp.GetProperty("IsDesignModeEnabled").GetValue(null);
+                return (bool)xamarin.GetProperty("IsDesignModeEnabled").GetValue(null);
             }
 
             return false;

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Takesoft.MvvmMicro
+namespace MvvmMicro
 {
     /// <summary>
     /// Defines an interface for a publish-subscribe message broker.
