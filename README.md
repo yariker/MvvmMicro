@@ -11,12 +11,12 @@ A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired b
 - .NET Framework 4.5 (WPF)
 - .NET Standard 2.0 (UWP, Xamarin.Forms)
 
-## Downloads
+## Installation
 The primary way to use MvvmMicro is by adding the [nuget](https://www.nuget.org/packages/MvvmMicro) package to your project:
 ```
 Install-Package MvvmMicro
 ```
 
-## Classes and Interfaces
+## Classes and interfaces
 Here's an overview of classes and interfaces exposed by the library:
 ![Class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png)
