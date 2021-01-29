@@ -12,7 +12,7 @@ A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired b
 - .NET Standard 2.0 (UWP, Xamarin.Forms)
 
 ## Downloads
-The primary way to use MvvmMicro is by adding the [nuget](https://www.nuget.org/packages/MvvmMicro) package to your project"
+The primary way to use MvvmMicro is by adding the [nuget](https://www.nuget.org/packages/MvvmMicro) package to your project:
 ```
 Install-Package MvvmMicro
 ```
