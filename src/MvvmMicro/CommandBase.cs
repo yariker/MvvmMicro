@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Takesoft.MvvmMicro
+namespace MvvmMicro
 {
     /// <summary>
     /// Provides the abstract base class for a command.

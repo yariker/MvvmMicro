@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
-namespace Takesoft.MvvmMicro
+namespace MvvmMicro
 {
     /// <summary>
     /// Provides the base class for objects that support property change notification.

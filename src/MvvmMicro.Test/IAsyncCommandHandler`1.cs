@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
-    public interface IAsyncCommandHandler<T>
+    public interface IAsyncCommandHandler<in T>
     {
         bool CanExecute(T parameter);
         Task ExecuteAsync(T parameter);

@@ -5,14 +5,14 @@ using System.Threading.Tasks;
 using Moq;
 using Xunit;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
-    public class SimpleMessengerTest
+    public class MessengerTest
     {
         [Fact]
         public void Subscribe_Should_Verify_Arguments()
         {
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Subscribe(null, Mock.Of<Action<string>>()));
             Assert.Throws<ArgumentNullException>("callback", () => messenger.Subscribe<string>(Mock.Of<object>(), null));
         }
@@ -21,7 +21,7 @@ namespace Takesoft.MvvmMicro.Test
         public void Subscribe_Should_Register_Subscriber_Callback()
         {
             const string notification = "Message";
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             var subscriberMock = new Mock<ISubscriber<string>>();
             messenger.Subscribe<string>(subscriberMock.Object, subscriberMock.Object.Callback);
             messenger.Publish(notification);
@@ -31,7 +31,7 @@ namespace Takesoft.MvvmMicro.Test
         [Fact]
         public void Subscribe_Should_Not_Hold_Strong_Reference_To_Subscriber()
         {
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             var (subscriberWeak, releaseSignal, releasedEvent) = GetGarbageCollectableInstance(() =>
             {
                 var instance = Mock.Of<ISubscriber<string>>();
@@ -51,7 +51,7 @@ namespace Takesoft.MvvmMicro.Test
         [Fact]
         public void Subscribe_Should_Keep_Callback_Alive()
         {
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             var subscriber = new object();
 
             var (callbackWeak, releaseSignal, releasedEvent) = GetGarbageCollectableInstance(() =>
@@ -74,7 +74,7 @@ namespace Takesoft.MvvmMicro.Test
         [Fact]
         public void Publish_Should_Send_Message_To_Appropriate_Subscriber()
         {
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
 
             var subscriber1 = new Mock<ISubscriber<object>>();
             var subscriber2 = new Mock<ISubscriber<string>>();
@@ -105,17 +105,17 @@ namespace Takesoft.MvvmMicro.Test
         }
 
         [Fact]
-        public void Unsubscribe_Shold_Verify_Arguments()
+        public void Unsubscribe_Should_Verify_Arguments()
         {
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Unsubscribe(null));
         }
 
         [Fact]
-        public void Unsubscribe_Shold_Unregister_Subscriber_Callbacks()
+        public void Unsubscribe_Should_Unregister_Subscriber_Callbacks()
         {
             const string notification = "Message";
-            var messenger = new SimpleMessenger();
+            var messenger = new Messenger();
             var subscriberMock = new Mock<ISubscriber<string>>();
             messenger.Subscribe<string>(subscriberMock.Object, subscriberMock.Object.Callback);
             messenger.Unsubscribe(subscriberMock.Object);

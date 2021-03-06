@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
-namespace Takesoft.MvvmMicro
+namespace MvvmMicro
 {
     /// <summary>
     /// A basic implementation of <see cref="IMessenger"/> with the following characteristics:
@@ -30,14 +30,14 @@ namespace Takesoft.MvvmMicro
     ///     </item>
     /// </list>
     /// </summary>
-    public class SimpleMessenger : IMessenger
+    public class Messenger : IMessenger
     {
         private readonly Dictionary<Type, Channel> _registry = new Dictionary<Type, Channel>();
 
         /// <summary>
-        /// Gets the default instance of the <see cref="SimpleMessenger" />.
+        /// Gets the default instance of the <see cref="Messenger" />.
         /// </summary>
-        public static IMessenger Default { get; } = new SimpleMessenger();
+        public static IMessenger Default { get; } = new Messenger();
 
         /// <inheritdoc />
         public void Publish<T>(T message)

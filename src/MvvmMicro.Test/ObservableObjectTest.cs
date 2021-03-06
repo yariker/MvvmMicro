@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using Xunit;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
     public class ObservableObjectTest : ObservableObject
     {

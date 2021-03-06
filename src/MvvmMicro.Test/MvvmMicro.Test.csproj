@@ -3,8 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
     <IsPackable>false</IsPackable>
-    <AssemblyName>Takesoft.MvvmMicro.Test</AssemblyName>
-    <RootNamespace>Takesoft.MvvmMicro.Test</RootNamespace>
+    <AssemblyName>MvvmMicro.Test</AssemblyName>
+    <RootNamespace>MvvmMicro.Test</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

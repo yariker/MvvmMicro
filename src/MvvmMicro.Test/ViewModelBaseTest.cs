@@ -4,7 +4,7 @@ using System.Text;
 using Moq;
 using Xunit;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
     public class ViewModelBaseTest : ViewModelBase
     {
@@ -17,7 +17,7 @@ namespace Takesoft.MvvmMicro.Test
         public void Ctor_Should_Use_SimpleMessenger_By_Default()
         {
             var viewModel = new ViewModelBaseTest(null);
-            Assert.Same(SimpleMessenger.Default, viewModel.Messenger);
+            Assert.Same(MvvmMicro.Messenger.Default, viewModel.Messenger);
         }        
         
         [Fact]

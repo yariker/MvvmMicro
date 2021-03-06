@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
-    <AssemblyName>Takesoft.MvvmMicro</AssemblyName>
-    <RootNamespace>Takesoft.MvvmMicro</RootNamespace>
+    <AssemblyName>MvvmMicro</AssemblyName>
+    <RootNamespace>MvvmMicro</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>

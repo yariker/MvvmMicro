@@ -2,7 +2,7 @@
 using Moq;
 using Xunit;
 
-namespace Takesoft.MvvmMicro.Test
+namespace MvvmMicro.Test
 {
     public class RelayCommandTest
     {
