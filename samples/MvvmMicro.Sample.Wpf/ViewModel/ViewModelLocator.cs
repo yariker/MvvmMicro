@@ -1,8 +1,8 @@
 ﻿using System;
 using Autofac;
-using Takesoft.MvvmMicro.Sample.Wpf.Services;
+using MvvmMicro.Sample.Wpf.Services;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.ViewModel
+namespace MvvmMicro.Sample.Wpf.ViewModel
 {
     public sealed class ViewModelLocator : IDisposable
     {
@@ -23,7 +23,7 @@ namespace Takesoft.MvvmMicro.Sample.Wpf.ViewModel
                 containerBuilder.RegisterType<CatFactFeed>().As<ICatFactFeed>().SingleInstance();
             }
 
-            containerBuilder.RegisterInstance(SimpleMessenger.Default).As<IMessenger>();
+            containerBuilder.RegisterInstance(Messenger.Default).As<IMessenger>();
             containerBuilder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
 
             _container = containerBuilder.Build();

@@ -1,48 +1,62 @@
 ﻿using System;
 using System.Linq;
-using System.Diagnostics;
+using System.IO;
+using System.Net;
 using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
-using Takesoft.MvvmMicro.Sample.Wpf.Model;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using MvvmMicro.Sample.Wpf.Model;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.Services
+namespace MvvmMicro.Sample.Wpf.Services
 {
     public sealed class CatFactFeed : ICatFactFeed, IDisposable
     {
-        private static readonly TimeSpan MinLoadTime = TimeSpan.FromSeconds(2);
-        private readonly HttpClient _client = new HttpClient();
+        private static readonly Uri RandomPictureUri = new Uri("https://cataas.com/cat");
+        private readonly HttpClient _client = new HttpClient { MaxResponseContentBufferSize = 5 * 1024 * 1024 };
 
         public async Task<Fact[]> GetFactsAsync(int amount, CancellationToken cancellationToken)
         {
-            var stopwatch = Stopwatch.StartNew();
+            CancellationTokenRegistration cancellationRegistration =
+                cancellationToken.CanBeCanceled
+                    ? cancellationToken.Register(() => _client.CancelPendingRequests())
+                    : default;
 
-            // Download facts.
-            string uri = $"https://cat-fact.herokuapp.com/facts/random?amount={amount}";
-            var facts = await _client.GetAsync<Fact[]>(uri, cancellationToken).ConfigureAwait(false);
-
-            // Download random pictures.
-            var tasks = facts.Select(_ => _client.GetAsync<Picture>("https://aws.random.cat/meow", cancellationToken)).ToArray();
-            await Task.WhenAll(tasks).ConfigureAwait(false);
-
-            for (int i = 0; i < facts.Length; i++)
+            using (cancellationRegistration)
             {
-                facts[i].PictureUri = tasks[i].Result.File;
-            }
+                // Download facts.
+                string uri = $"https://cat-fact.herokuapp.com/facts/random?amount={amount}";
+                Fact[] facts = await _client.GetAsync<Fact[]>(uri);
 
-            // Artificial delay for demo purposes.
-            stopwatch.Stop();
-            if (stopwatch.Elapsed < MinLoadTime)
-            {
-                await Task.Delay(MinLoadTime - stopwatch.Elapsed, cancellationToken).ConfigureAwait(false);
-            }
+                // Download pictures (in parallel).
+                ServicePointManager.DefaultConnectionLimit = facts.Length;
+                Task<Stream>[] pictures = facts.Select(x => _client.GetStreamAsync(RandomPictureUri)).ToArray();
+                await Task.WhenAll(pictures);
 
-            return facts;
+                // Assign pictures.
+                for (int i = 0; i < facts.Length; i++)
+                {
+                    facts[i].Picture = CreateImageSource(await pictures[i]);
+                }
+
+                return facts;
+            }
         }
 
         public void Dispose()
         {
             _client.Dispose();
+        }
+
+        private static ImageSource CreateImageSource(Stream stream)
+        {
+            var image = new BitmapImage();
+            image.BeginInit();
+            image.CacheOption = BitmapCacheOption.OnLoad;
+            image.StreamSource = stream;
+            image.EndInit();
+            return image;
         }
     }
 }

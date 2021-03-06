@@ -4,10 +4,10 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Takesoft.MvvmMicro.Sample.Wpf.Model;
-using Takesoft.MvvmMicro.Sample.Wpf.Services;
+using MvvmMicro.Sample.Wpf.Model;
+using MvvmMicro.Sample.Wpf.Services;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.ViewModel
+namespace MvvmMicro.Sample.Wpf.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {

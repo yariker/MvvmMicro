@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Windows.Media;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.Model
+namespace MvvmMicro.Sample.Wpf.Model
 {
     public class Fact
     {
@@ -8,6 +9,6 @@ namespace Takesoft.MvvmMicro.Sample.Wpf.Model
 
         public DateTime UpdatedAt { get; set; }
 
-        public Uri PictureUri { get; set; }
+        public ImageSource Picture { get; set; }
     }
 }

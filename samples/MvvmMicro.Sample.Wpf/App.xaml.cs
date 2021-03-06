@@ -1,7 +1,7 @@
 ﻿using System.Windows;
-using Takesoft.MvvmMicro.Sample.Wpf.ViewModel;
+using MvvmMicro.Sample.Wpf.ViewModel;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf
+namespace MvvmMicro.Sample.Wpf
 {
     /// <summary>
     /// Interaction logic for App.xaml

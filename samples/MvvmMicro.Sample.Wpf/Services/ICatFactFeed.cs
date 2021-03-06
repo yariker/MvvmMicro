@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Takesoft.MvvmMicro.Sample.Wpf.Model;
+using MvvmMicro.Sample.Wpf.Model;
 
-namespace Takesoft.MvvmMicro.Sample.Wpf.Services
+namespace MvvmMicro.Sample.Wpf.Services
 {
     public interface ICatFactFeed
     {
