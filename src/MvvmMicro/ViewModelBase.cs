@@ -33,26 +33,18 @@ namespace MvvmMicro
 
         private static bool GetIsInDesignMode()
         {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NET5_0_WINDOWS
+            // WPF.
             var descriptor = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
                 System.ComponentModel.DesignerProperties.IsInDesignModeProperty, typeof(System.Windows.FrameworkElement));
-
             return (bool)descriptor.Metadata.DefaultValue;
-#else
+#elif WINDOWS_UWP
             // UWP.
-            var uwp = Type.GetType("Windows.ApplicationModel.DesignMode, Windows.Foundation.UniversalApiContract, ContentType=WindowsRuntime");
-            if (uwp != null)
-            {
-                return (bool)uwp.GetProperty("DesignModeEnabled").GetValue(null);
-            }
-
+            return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
+#elif NETSTANDARD
             // Xamarin.Forms.
-            var xamarin = Type.GetType("Xamarin.Forms.DesignMode, Xamarin.Forms.Core");
-            if (xamarin != null)
-            {
-                return (bool)xamarin.GetProperty("IsDesignModeEnabled").GetValue(null);
-            }
-
+            return Xamarin.Forms.DesignMode.IsDesignModeEnabled;
+#else
             return false;
 #endif
         }

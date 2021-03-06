@@ -2,7 +2,7 @@ name: Release
 
 on:
   push:
-    tags: 'v*'
+    tags: ['v*']
 
 jobs:
   build:
@@ -12,7 +12,7 @@ jobs:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
     - uses: actions/checkout@v1
-    - uses: warrenbuckley/Setup-MSBuild@v1
+    - uses: microsoft/setup-msbuild@v1.0.2
     - uses: actions/setup-dotnet@v1.0.0
     - name: Build
       run: .\build.ps1 -Version $Env:GITHUB_REF.Replace('refs/tags/v', '') -Pack
@@ -26,6 +26,6 @@ jobs:
       with:
         name: package
         path: package
-    - uses: warrenbuckley/Setup-Nuget@v1
+    - uses: nuget/setup-nuget@v1
     - name: Publish package
       run: nuget push package\*.nupkg -source https://www.nuget.org -apikey $Env:NUGET_API_KEY

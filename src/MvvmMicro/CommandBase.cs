@@ -8,7 +8,7 @@ namespace MvvmMicro
     /// </summary>
     public abstract class CommandBase : ICommand
     {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NET5_0_WINDOWS
         /// <inheritdoc />
         public event EventHandler CanExecuteChanged
         {
@@ -31,7 +31,7 @@ namespace MvvmMicro
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-#if NETFRAMEWORK
+#if NETFRAMEWORK || NET5_0_WINDOWS
             CommandManager.InvalidateRequerySuggested();
 #else
             CanExecuteChanged?.Invoke(this, EventArgs.Empty);

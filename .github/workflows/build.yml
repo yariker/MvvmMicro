@@ -9,14 +9,14 @@ on:
       - samples/**
       - src/**
       - .github/workflows/build.yml
-    tags-ignore: 'v*'
+    tags-ignore: ['v*']
 
 jobs:
   build:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v1
-    - uses: warrenbuckley/Setup-MSBuild@v1
+    - uses: microsoft/setup-msbuild@v1.0.2
     - uses: actions/setup-dotnet@v1.0.0
     - name: Build and Test
       run: .\build.ps1 -Version ("$(git describe --abbrev=0 --tags)".TrimStart('v').TrimEnd('-rc') + '-dev')

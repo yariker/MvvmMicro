@@ -1,7 +1,7 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>net45;net5.0-windows;uap10.0.16299;netstandard2.0</TargetFrameworks>
     <AssemblyName>MvvmMicro</AssemblyName>
     <RootNamespace>MvvmMicro</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -9,7 +9,6 @@
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageId>MvvmMicro</PackageId>
     <PackageIcon>icon.png</PackageIcon>
-    <Company>Takesoft</Company>
     <Authors>Yaroslav Bugaria</Authors>
     <Product>MvvmMicro</Product>
     <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired by MVVM Light Toolkit.</Description>
@@ -19,20 +18,29 @@
     <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageTags>mvvm wpf uwp xamarin-forms</PackageTags>
-    <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
+  <!-- Skip signing Xamarin.Forms target because Xamarin.Forms.Core is not strongly named. -->
+  <PropertyGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
+  <!-- Reference WPF libraries on .NET Framework & .NET 5. -->
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'net5.0-windows'">
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <!-- Reference Xamarin.Forms libraries on .NET Standard. -->
+  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <PackageReference Include="Xamarin.Forms" Version="3.5.0-*" />
+  </ItemGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
-  </ItemGroup>
-  
-  <ItemGroup Condition=" '$(TargetFramework)' == 'net45' ">
-    <Reference Include="PresentationCore" />
-    <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,8 +8,9 @@ A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired b
 - Avoid [feature kreep](https://en.wikipedia.org/wiki/Feature_creep) – only core MVVM types and services are included, such as `RelayCommand`, `ObservableObject` and a simple `IMessenger`.
 
 ## Supported platforms
-- .NET Framework 4.5 (WPF)
-- .NET Standard 2.0 (UWP, Xamarin.Forms)
+- .NET Framework 4.5 & .NET 5.0 (WPF)
+- .NET Standard 2.0 (Xamarin.Forms)
+- Universal Windows Platform
 
 ## Installation
 The primary way to use MvvmMicro is by adding the [nuget](https://www.nuget.org/packages/MvvmMicro) package to your project:
