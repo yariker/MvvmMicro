@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
-using System.Windows.Input;
 using MvvmMicro.Sample.Wpf.Model;
 using MvvmMicro.Sample.Wpf.Services;
 
@@ -29,23 +28,23 @@ namespace MvvmMicro.Sample.Wpf.ViewModel
             }
         }
 
-        /// <summary>
-        /// Gets the command that loads more items into the <see cref="Facts"/> collection.
-        /// </summary>
-        public ICommand LoadCommand { get; }
-
-        /// <summary>
-        /// Gets the command that cancels the <see cref="LoadCommand"/> if it's running.
-        /// </summary>
-        public ICommand CancelCommand { get; }
-
         public bool IsLoading
         {
             get => _isLoading;
             private set => Set(ref _isLoading, value);
         }
 
-        public ObservableCollection<Fact> Facts { get; } = new ObservableCollection<Fact>();
+        public ObservableCollection<Fact> Facts { get; } = new();
+
+        /// <summary>
+        /// Gets the command that loads more items into the <see cref="Facts"/> collection.
+        /// </summary>
+        public AsyncRelayCommand<ScrollChangedEventArgs> LoadCommand { get; }
+
+        /// <summary>
+        /// Gets the command that cancels the <see cref="LoadCommand"/> if it's running.
+        /// </summary>
+        public RelayCommand CancelCommand { get; }
 
         private bool CanLoad(ScrollChangedEventArgs e)
         {
@@ -60,8 +59,8 @@ namespace MvvmMicro.Sample.Wpf.ViewModel
 
             try
             {
-                Fact[] facts = await _catFactFeed.GetFactsAsync(5, _cancellationTokenSource.Token);
-                foreach (Fact fact in facts)
+                var facts = await _catFactFeed.GetFactsAsync(5, _cancellationTokenSource.Token);
+                foreach (var fact in facts)
                 {
                     Facts.Add(fact);
                 }
@@ -88,7 +87,7 @@ namespace MvvmMicro.Sample.Wpf.ViewModel
         private void OnCancel()
         {
             _cancellationTokenSource.Cancel();
-            CommandManager.InvalidateRequerySuggested();
+            CancelCommand.RaiseCanExecuteChanged();
         }
     }
 }
