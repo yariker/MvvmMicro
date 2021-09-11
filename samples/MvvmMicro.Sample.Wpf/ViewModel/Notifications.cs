@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace MvvmMicro.Sample.Wpf.ViewModel
+﻿namespace MvvmMicro.Sample.Wpf.ViewModel
 {
     public static class Notifications
     {

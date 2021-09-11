@@ -15,7 +15,12 @@ namespace MvvmMicro.Sample.Wpf.Services
     public sealed class CatFactFeed : ICatFactFeed, IDisposable
     {
         private static readonly Uri RandomPictureUri = new("https://cataas.com/cat");
-        private readonly HttpClient _client = new() { MaxResponseContentBufferSize = 5 * 1024 * 1024 };
+
+        private readonly HttpClient _client = new()
+        {
+            MaxResponseContentBufferSize = 5 * 1024 * 1024,
+            Timeout = TimeSpan.FromSeconds(15),
+        };
 
         static CatFactFeed()
         {
