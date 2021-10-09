@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -8,6 +10,7 @@ namespace MvvmMicro
     /// An <see cref="ICommand"/> with an asynchronous parametrized <see cref="Task"/>-based delegate, which
     /// prevents a reentrant execution.
     /// </summary>
+    /// <typeparam name="T">The type of the command argument.</typeparam>
     public class AsyncRelayCommand<T> : CommandBase
     {
         private readonly Func<T, Task> _execute;
@@ -15,7 +18,7 @@ namespace MvvmMicro
         private bool _isExecuting;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AsyncRelayCommand"/> class.
+        /// Initializes a new instance of the <see cref="AsyncRelayCommand{T}"/> class.
         /// </summary>
         /// <param name="execute">A delegate to execute when <see cref="ICommand.Execute(object)"/> is called on the command.</param>
         /// <param name="canExecute">A delegate to execute when <see cref="ICommand.CanExecute(object)"/> is called on the command.</param>
@@ -23,7 +26,7 @@ namespace MvvmMicro
         public AsyncRelayCommand(Func<T, Task> execute, Func<T, bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute ?? new Func<T, bool>(_ => true);
+            _canExecute = canExecute ?? (_ => true);
         }
 
         /// <inheritdoc />

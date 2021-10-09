@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
@@ -32,7 +34,7 @@ namespace MvvmMicro
     /// </summary>
     public class Messenger : IMessenger
     {
-        private readonly Dictionary<Type, Channel> _registry = new Dictionary<Type, Channel>();
+        private readonly Dictionary<Type, Channel> _registry = new();
 
         /// <summary>
         /// Gets the default instance of the <see cref="Messenger" />.
@@ -78,6 +80,7 @@ namespace MvvmMicro
             {
                 throw new ArgumentNullException(nameof(subscriber));
             }
+
             if (callback is null)
             {
                 throw new ArgumentNullException(nameof(callback));
@@ -114,11 +117,8 @@ namespace MvvmMicro
 
         private class Channel
         {
-            private readonly List<WeakReference<object>> _subscribers =
-                new List<WeakReference<object>>();
-
-            private readonly ConditionalWeakTable<object, List<Delegate>> _callbacks =
-                new ConditionalWeakTable<object, List<Delegate>>();
+            private readonly List<WeakReference<object>> _subscribers = new();
+            private readonly ConditionalWeakTable<object, List<Delegate>> _callbacks = new();
 
             public void Subscribe(object subscriber, Delegate callback)
             {
@@ -150,7 +150,7 @@ namespace MvvmMicro
             {
                 for (int i = _subscribers.Count - 1; i >= 0; i--)
                 {
-                    if (_subscribers[i].TryGetTarget(out object subscriber) && 
+                    if (_subscribers[i].TryGetTarget(out object subscriber) &&
                         _callbacks.TryGetValue(subscriber, out List<Delegate> callbacks))
                     {
                         list.AddRange(callbacks);

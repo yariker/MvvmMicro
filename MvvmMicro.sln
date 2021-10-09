@@ -5,7 +5,13 @@ VisualStudioVersion = 16.0.29503.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro", "src\MvvmMicro\MvvmMicro.csproj", "{81EEE276-4F2E-4B50-AF91-C021E31699BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MvvmMicro.Test", "src\MvvmMicro.Test\MvvmMicro.Test.csproj", "{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro.Test", "src\MvvmMicro.Test\MvvmMicro.Test.csproj", "{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D8087C5-B368-485A-8BBE-A546ABC6EA5F}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+		stylecop.json = stylecop.json
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

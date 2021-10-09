@@ -1,3 +1,5 @@
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
@@ -13,8 +15,14 @@ namespace MvvmMicro.Test
         public void Subscribe_Should_Verify_Arguments()
         {
             var messenger = new Messenger();
-            Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Subscribe(null, Mock.Of<Action<string>>()));
-            Assert.Throws<ArgumentNullException>("callback", () => messenger.Subscribe<string>(Mock.Of<object>(), null));
+
+            Assert.Throws<ArgumentNullException>(
+                "subscriber",
+                () => messenger.Subscribe(null, Mock.Of<Action<string>>()));
+
+            Assert.Throws<ArgumentNullException>(
+                "callback",
+                () => messenger.Subscribe<string>(Mock.Of<object>(), null));
         }
 
         [Fact]
@@ -32,7 +40,7 @@ namespace MvvmMicro.Test
         public void Subscribe_Should_Not_Hold_Strong_Reference_To_Subscriber()
         {
             var messenger = new Messenger();
-            var (subscriberWeak, releaseSignal, releasedEvent) = GetGarbageCollectableInstance(() =>
+            var (subscriberWeak, releaseSignal, releasedEvent) = GetCollectableInstance(() =>
             {
                 var instance = Mock.Of<ISubscriber<string>>();
                 messenger.Subscribe<string>(instance, instance.Callback);
@@ -54,7 +62,7 @@ namespace MvvmMicro.Test
             var messenger = new Messenger();
             var subscriber = new object();
 
-            var (callbackWeak, releaseSignal, releasedEvent) = GetGarbageCollectableInstance(() =>
+            var (callbackWeak, releaseSignal, releasedEvent) = GetCollectableInstance(() =>
             {
                 var callback = Mock.Of<Action<string>>();
                 messenger.Subscribe(subscriber, callback);
@@ -124,7 +132,7 @@ namespace MvvmMicro.Test
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static (WeakReference, ManualResetEventSlim, Task) GetGarbageCollectableInstance<T>(Func<T> factory)
+        private static (WeakReference Callback, ManualResetEventSlim Releaser, Task WaitTask) GetCollectableInstance<T>(Func<T> factory)
             where T : class
         {
             var instance = factory();

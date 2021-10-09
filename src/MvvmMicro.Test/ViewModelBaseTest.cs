@@ -1,6 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
 using Moq;
 using Xunit;
 
@@ -18,8 +17,8 @@ namespace MvvmMicro.Test
         {
             var viewModel = new ViewModelBaseTest(null);
             Assert.Same(MvvmMicro.Messenger.Default, viewModel.Messenger);
-        }        
-        
+        }
+
         [Fact]
         public void Ctor_Should_Accept_Custom_Messenger()
         {

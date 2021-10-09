@@ -1,7 +1,7 @@
 # <img src="src/MvvmMicro/icon.png" alt="logo" width="32" height="32" /> MvvmMicro
 <a href="https://www.nuget.org/packages/MvvmMicro" target="_blank"><img alt="Nuget" src="https://img.shields.io/nuget/v/MvvmMicro" /></a>
 
-A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired by MVVM Light Toolkit.
+A clean and lightweight MVVM framework for WPF, UWP and .NET Standard 2.0 inspired by MVVM Light Toolkit.
 
 ## Goals
 - No third party dependencies, such as `CommonServiceLocator` or `System.Windows.Interactivity`.
@@ -9,8 +9,8 @@ A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired b
 
 ## Supported platforms
 - .NET Framework 4.5 & .NET 5.0 (WPF)
-- .NET Standard 2.0 (Xamarin.Forms)
-- Universal Windows Platform
+- Universal Windows Platform (UWP)
+- .NET Standard 2.0
 
 ## Installation
 The primary way to use MvvmMicro is by adding the [nuget](https://www.nuget.org/packages/MvvmMicro) package to your project:

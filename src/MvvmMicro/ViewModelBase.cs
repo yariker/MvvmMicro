@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 
 namespace MvvmMicro
 {
@@ -7,7 +9,7 @@ namespace MvvmMicro
     /// </summary>
     public class ViewModelBase : ObservableObject
     {
-        private static readonly Lazy<bool> IsInDesignModeLazy = new Lazy<bool>(GetIsInDesignMode);
+        private static readonly Lazy<bool> IsInDesignModeLazy = new(GetIsInDesignMode);
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ViewModelBase"/> class.
@@ -22,14 +24,14 @@ namespace MvvmMicro
         }
 
         /// <summary>
+        /// Gets a value indicating whether the application is running in the context of a designer.
+        /// </summary>
+        public static bool IsInDesignMode => IsInDesignModeLazy.Value;
+
+        /// <summary>
         /// Gets the messenger associated with this view model.
         /// </summary>
         protected IMessenger Messenger { get; }
-
-        /// <summary>
-        /// Gets the value determining whether the application is running in the context of a designer.
-        /// </summary>
-        public static bool IsInDesignMode => IsInDesignModeLazy.Value;
 
         private static bool GetIsInDesignMode()
         {
@@ -41,9 +43,6 @@ namespace MvvmMicro
 #elif WINDOWS_UWP
             // UWP.
             return Windows.ApplicationModel.DesignMode.DesignModeEnabled;
-#elif NETSTANDARD
-            // Xamarin.Forms.
-            return Xamarin.Forms.DesignMode.IsDesignModeEnabled;
 #else
             return false;
 #endif

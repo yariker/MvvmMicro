@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
@@ -47,8 +49,8 @@ namespace MvvmMicro.Test
             command.Execute(null);
 
             handler.Verify(h => h.ExecuteAsync(), canExecute ? Times.Once() : Times.Never());
-        }        
-        
+        }
+
         [Fact]
         public void Execute_Should_Prevent_Reentrancy()
         {
@@ -68,7 +70,7 @@ namespace MvvmMicro.Test
             handler.Verify(h => h.ExecuteAsync(), Times.Once);
 
             taskCompletionSource.SetResult(true);
-            
+
             Assert.True(command.CanExecute(null));
             command.Execute(null);
 
@@ -86,5 +88,5 @@ namespace MvvmMicro.Test
 
             handler.Verify(h => h.EventHandler(command, EventArgs.Empty), Times.Once);
         }
-    }    
+    }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using Xunit;
 
 namespace MvvmMicro.Test

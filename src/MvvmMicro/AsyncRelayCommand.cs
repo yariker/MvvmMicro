@@ -1,4 +1,6 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -23,7 +25,7 @@ namespace MvvmMicro
         public AsyncRelayCommand(Func<Task> execute, Func<bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute ?? new Func<bool>(() => true);
+            _canExecute = canExecute ?? (() => true);
         }
 
         /// <inheritdoc />

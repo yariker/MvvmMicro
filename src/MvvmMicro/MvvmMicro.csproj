@@ -1,4 +1,4 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.23">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
 
   <PropertyGroup>
     <TargetFrameworks>net45;net5.0-windows;uap10.0.16299;netstandard2.0</TargetFrameworks>
@@ -11,7 +11,7 @@
     <PackageIcon>icon.png</PackageIcon>
     <Authors>Yaroslav Bugaria</Authors>
     <Product>MvvmMicro</Product>
-    <Description>A clean and lightweight MVVM framework for WPF, UWP and Xamarin.Forms inspired by MVVM Light Toolkit.</Description>
+    <Description>A clean and lightweight MVVM framework for WPF, UWP and .NET Standard inspired by MVVM Light Toolkit.</Description>
     <Copyright>(c) Yaroslav Bugaria, $([System.DateTime]::Now.ToString(yyyy))</Copyright>
     <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
     <NeutralLanguage>en-US</NeutralLanguage>
@@ -21,12 +21,9 @@
     <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
-  </PropertyGroup>
-
-  <!-- Skip signing Xamarin.Forms target because Xamarin.Forms.Core is not strongly named. -->
-  <PropertyGroup Condition="'$(TargetFramework)' != 'netstandard2.0'">
     <SignAssembly>true</SignAssembly>
     <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 
   <!-- Reference WPF libraries on .NET Framework & .NET 5. -->
@@ -34,16 +31,16 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
-  <!-- Reference Xamarin.Forms libraries on .NET Standard. -->
-  <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
-    <PackageReference Include="Xamarin.Forms" Version="3.5.0-*" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
     <None Include="icon.png">
       <Pack>True</Pack>
       <PackagePath></PackagePath>

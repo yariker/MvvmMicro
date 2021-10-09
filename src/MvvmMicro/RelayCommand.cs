@@ -1,10 +1,12 @@
-﻿using System;
+﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
+
+using System;
 using System.Windows.Input;
 
 namespace MvvmMicro
 {
     /// <summary>
-    /// An <see cref="ICommand"/> whose delegates do not take any parameters for 
+    /// An <see cref="ICommand"/> whose delegates do not take any parameters for
     /// <see cref="ICommand.Execute(object)"/> and <see cref="ICommand.CanExecute(object)"/>.
     /// </summary>
     public class RelayCommand : CommandBase
@@ -13,7 +15,7 @@ namespace MvvmMicro
         private readonly Func<bool> _canExecute;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AsyncRelayCommand"/> class.
+        /// Initializes a new instance of the <see cref="RelayCommand"/> class.
         /// </summary>
         /// <param name="execute">A delegate to execute when <see cref="ICommand.Execute(object)"/> is called on the command.</param>
         /// <param name="canExecute">A delegate to execute when <see cref="ICommand.CanExecute(object)"/> is called on the command.</param>
@@ -21,7 +23,7 @@ namespace MvvmMicro
         public RelayCommand(Action execute, Func<bool> canExecute = null)
         {
             _execute = execute ?? throw new ArgumentNullException(nameof(execute));
-            _canExecute = canExecute ?? new Func<bool>(() => true);
+            _canExecute = canExecute ?? (() => true);
         }
 
         /// <inheritdoc />
