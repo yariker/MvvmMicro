@@ -1,7 +1,7 @@
-﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.38">
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <PropertyGroup>
-    <TargetFrameworks>net45;net5.0-windows;uap10.0.16299;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net46;net5.0-windows;uap10.0.19041</TargetFrameworks>
     <AssemblyName>MvvmMicro</AssemblyName>
     <RootNamespace>MvvmMicro</RootNamespace>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
@@ -27,13 +27,13 @@
   </PropertyGroup>
 
   <!-- Reference WPF libraries on .NET Framework & .NET 5. -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net45' Or '$(TargetFramework)' == 'net5.0-windows'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net46' Or '$(TargetFramework)' == 'net5.0-windows'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-*" PrivateAssets="All" />
-    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.354">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1" PrivateAssets="All" />
+    <PackageReference Include="StyleCop.Analyzers" Version="1.2.0-beta.376">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>

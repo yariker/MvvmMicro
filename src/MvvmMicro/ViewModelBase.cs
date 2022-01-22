@@ -35,7 +35,7 @@ namespace MvvmMicro
 
         private static bool GetIsInDesignMode()
         {
-#if NETFRAMEWORK || NET5_0_WINDOWS
+#if NETFRAMEWORK || NET5_0
             // WPF.
             var descriptor = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
                 System.ComponentModel.DesignerProperties.IsInDesignModeProperty, typeof(System.Windows.FrameworkElement));
