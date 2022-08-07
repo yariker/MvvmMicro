@@ -12,10 +12,10 @@ dotnet_separate_import_directive_groups = false
 csharp_using_directive_placement = outside_namespace:none
 
 # Always use "this." and "Me." when applicable; let StyleCop Analyzers provide the warning and fix
-dotnet_style_qualification_for_field = true:none
-dotnet_style_qualification_for_property = true:none
-dotnet_style_qualification_for_method = true:none
-dotnet_style_qualification_for_event = true:none
+dotnet_style_qualification_for_field = false:none
+dotnet_style_qualification_for_property = false:none
+dotnet_style_qualification_for_method = false:none
+dotnet_style_qualification_for_event = false:none
 
 # Use language keywords where applicable; let StyleCop Analyzers provide the warning and fix
 dotnet_style_predefined_type_for_locals_parameters_members = true:none
@@ -91,19 +91,22 @@ csharp_style_throw_expression = true:none
 csharp_style_conditional_delegate_call = true:suggestion
 
 # SA1101: Prefix local calls with this
-dotnet_diagnostic.SA1101.severity = none
+dotnet_diagnostic.sa1101.severity = none
 
 # SA1600: Elements should be documented
-dotnet_diagnostic.SA1600.severity = none
+dotnet_diagnostic.sa1600.severity = none
 
 # SA1309: Field names should not begin with underscore
-dotnet_diagnostic.SA1309.severity = none
+dotnet_diagnostic.sa1309.severity = none
 
 # SX1101: Do not prefix local members with "this."
-dotnet_diagnostic.SX1101.severity = warning
+dotnet_diagnostic.sx1101.severity = warning
 
 # SX1309: Field names should begin with underscore
-dotnet_diagnostic.SX1309.severity = warning
+dotnet_diagnostic.sx1309.severity = warning
 
 # SA0001: XML comment analysis disabled
-dotnet_diagnostic.SA0001.severity = none
+dotnet_diagnostic.sa0001.severity = none
+
+# SA1141: Use tuple syntax
+dotnet_diagnostic.SA1141.severity = none

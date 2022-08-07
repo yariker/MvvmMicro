@@ -1,9 +1,8 @@
 ﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
 
-namespace MvvmMicro.Test
+namespace MvvmMicro.Test;
+
+public interface ISubscriber<in T>
 {
-    public interface ISubscriber<in T>
-    {
-        void Callback(T message);
-    }
+    void Callback(T message);
 }

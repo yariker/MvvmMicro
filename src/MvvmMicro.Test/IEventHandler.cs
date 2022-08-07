@@ -2,10 +2,9 @@
 
 using System;
 
-namespace MvvmMicro.Test
+namespace MvvmMicro.Test;
+
+public interface IEventHandler
 {
-    public interface IEventHandler
-    {
-        void EventHandler(object sender, EventArgs e);
-    }
+    void EventHandler(object sender, EventArgs e);
 }

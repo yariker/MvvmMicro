@@ -2,12 +2,11 @@
 
 using System.Threading.Tasks;
 
-namespace MvvmMicro.Test
-{
-    public interface IAsyncCommandHandler<in T>
-    {
-        bool CanExecute(T parameter);
+namespace MvvmMicro.Test;
 
-        Task ExecuteAsync(T parameter);
-    }
+public interface IAsyncCommandHandler<in T>
+{
+    bool CanExecute(T parameter);
+
+    Task ExecuteAsync(T parameter);
 }
