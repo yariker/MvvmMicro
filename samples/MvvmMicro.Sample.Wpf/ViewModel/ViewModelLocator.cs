@@ -2,39 +2,38 @@
 using Autofac;
 using MvvmMicro.Sample.Wpf.Services;
 
-namespace MvvmMicro.Sample.Wpf.ViewModel
+namespace MvvmMicro.Sample.Wpf.ViewModel;
+
+public sealed class ViewModelLocator : IDisposable
 {
-    public sealed class ViewModelLocator : IDisposable
+    private readonly IContainer _container;
+
+    public ViewModelLocator()
     {
-        private readonly IContainer _container;
+        var containerBuilder = new ContainerBuilder();
 
-        public ViewModelLocator()
+        if (ViewModelBase.IsInDesignMode)
         {
-            var containerBuilder = new ContainerBuilder();
-
-            if (ViewModelBase.IsInDesignMode)
-            {
-                // Design-time services.
-                containerBuilder.RegisterType<Design.CatFactFeed>().As<ICatFactFeed>().SingleInstance();
-            }
-            else
-            {
-                // Run-time services.
-                containerBuilder.RegisterType<CatFactFeed>().As<ICatFactFeed>().SingleInstance();
-            }
-
-            containerBuilder.RegisterInstance(Messenger.Default).As<IMessenger>();
-            containerBuilder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
-
-            _container = containerBuilder.Build();
+            // Design-time services.
+            containerBuilder.RegisterType<Design.CatFactFeed>().As<ICatFactFeed>().SingleInstance();
+        }
+        else
+        {
+            // Run-time services.
+            containerBuilder.RegisterType<CatFactFeed>().As<ICatFactFeed>().SingleInstance();
         }
 
-        public MainViewModel Main => _container.Resolve<MainViewModel>();
+        containerBuilder.RegisterInstance(Messenger.Default).As<IMessenger>();
+        containerBuilder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
 
-        /// <inheritdoc />
-        public void Dispose()
-        {
-            _container.Dispose();
-        }
+        _container = containerBuilder.Build();
+    }
+
+    public MainViewModel Main => _container.Resolve<MainViewModel>();
+
+    /// <inheritdoc />
+    public void Dispose()
+    {
+        _container.Dispose();
     }
 }

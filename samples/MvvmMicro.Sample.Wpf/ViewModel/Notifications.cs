@@ -1,7 +1,6 @@
-﻿namespace MvvmMicro.Sample.Wpf.ViewModel
+﻿namespace MvvmMicro.Sample.Wpf.ViewModel;
+
+public static class Notifications
 {
-    public static class Notifications
-    {
-        public const string CloseWindow = "CloseWindow";
-    }
+    public const string CloseWindow = "CloseWindow";
 }

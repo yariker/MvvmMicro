@@ -1,19 +1,18 @@
 ﻿<Window x:Class="MvvmMicro.Sample.Wpf.View.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:b="http://schemas.microsoft.com/xaml/behaviors"
         xmlns:model="clr-namespace:MvvmMicro.Sample.Wpf.Model"
-        xmlns:cache="clr-namespace:System.Net.Cache;assembly=System"
-        mc:Ignorable="d"
         Title="Daily cat facts!"
-        Height="600"
         Width="800"
-        WindowStartupLocation="CenterScreen"
+        Height="600"
         Background="Black"
+        DataContext="{Binding Main, Source={StaticResource Locator}}"
         Loaded="Window_Loaded"
-        DataContext="{Binding Main, Source={StaticResource Locator}}">
+        WindowStartupLocation="CenterScreen"
+        mc:Ignorable="d">
 
     <b:Interaction.Triggers>
         <b:EventTrigger EventName="Loaded">
@@ -23,23 +22,22 @@
 
     <Window.Resources>
 
-        <Style x:Key="ListBoxStyle" TargetType="{x:Type ItemsControl}">
+        <Style x:Key="ListBoxStyle" TargetType="ItemsControl">
             <Setter Property="VirtualizingStackPanel.ScrollUnit" Value="Pixel" />
             <Setter Property="VirtualizingStackPanel.VirtualizationMode" Value="Recycling" />
             <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
             <Setter Property="Focusable" Value="False" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type ItemsControl}">
-                        <ScrollViewer BorderBrush="{TemplateBinding BorderBrush}"
-                                      BorderThickness="{TemplateBinding BorderThickness}"
+                    <ControlTemplate TargetType="ItemsControl">
+                        <ScrollViewer Padding="{TemplateBinding Padding}"
                                       Background="{TemplateBinding Background}"
-                                      Padding="{TemplateBinding Padding}"
+                                      BorderBrush="{TemplateBinding BorderBrush}"
+                                      BorderThickness="{TemplateBinding BorderThickness}"
                                       Focusable="False">
                             <b:Interaction.Triggers>
                                 <b:EventTrigger EventName="ScrollChanged">
-                                    <b:InvokeCommandAction Command="{Binding LoadCommand}"
-                                                           PassEventArgsToCommand="True" />
+                                    <b:InvokeCommandAction Command="{Binding LoadCommand}" PassEventArgsToCommand="True" />
                                 </b:EventTrigger>
                             </b:Interaction.Triggers>
                             <VirtualizingStackPanel IsItemsHost="True" />
@@ -50,31 +48,33 @@
         </Style>
 
         <DataTemplate x:Key="FactTemplate" DataType="{x:Type model:Fact}">
-            <DockPanel Margin="5" Height="180" LastChildFill="True" Focusable="True">
+            <DockPanel Height="180"
+                       Margin="5"
+                       Focusable="True"
+                       LastChildFill="True">
                 <DockPanel.Background>
-                    <ImageBrush x:Name="BackgroundImageBrush"
-                                ImageSource="{Binding Picture}"
-                                Stretch="UniformToFill"
-                                Opacity="0.15" />
+                    <ImageBrush ImageSource="{Binding Picture}"
+                                Opacity="0.15"
+                                Stretch="UniformToFill" />
                 </DockPanel.Background>
-                <Image Source="{Binding Picture}"
-                       DockPanel.Dock="Left"
-                       Width="200"
-                       Stretch="UniformToFill"
+                <Image Width="200"
+                       Margin="5"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
-                       Margin="5" />
-                <TextBlock Text="{Binding UpdatedAt}"
-                           Foreground="Gray"
+                       DockPanel.Dock="Left"
+                       Source="{Binding Picture}"
+                       Stretch="UniformToFill" />
+                <TextBlock Margin="5"
                            DockPanel.Dock="Top"
                            FontSize="10"
-                           Margin="5" />
-                <TextBlock Text="{Binding Text}"
-                           Foreground="White"
-                           TextWrapping="Wrap"
-                           TextTrimming="CharacterEllipsis"
+                           Foreground="Gray"
+                           Text="{Binding UpdatedAt}" />
+                <TextBlock Margin="5"
                            FontSize="20"
-                           Margin="5" />
+                           Foreground="White"
+                           Text="{Binding Text}"
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="Wrap" />
             </DockPanel>
         </DataTemplate>
 
@@ -83,28 +83,28 @@
     </Window.Resources>
 
     <Grid>
-        
-        <ItemsControl ItemsSource="{Binding Facts}"
-                      ItemTemplate="{StaticResource FactTemplate}"
+
+        <ItemsControl ItemTemplate="{StaticResource FactTemplate}"
+                      ItemsSource="{Binding Facts}"
                       Style="{StaticResource ListBoxStyle}" />
 
-        <StackPanel Visibility="{Binding IsLoading, Converter={StaticResource BooleanToVisibilityConverter}}"
+        <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Top"
-                    HorizontalAlignment="Center"
                     Background="#990000FF"
-                    Orientation="Horizontal">
-            <TextBlock VerticalAlignment="Center"
-                       Foreground="White"
-                       Text="Loading..."
+                    Orientation="Horizontal"
+                    Visibility="{Binding Path=LoadCommand.IsExecuting, Converter={StaticResource BooleanToVisibilityConverter}}">
+            <TextBlock Margin="10,5"
+                       VerticalAlignment="Center"
                        FontSize="14"
-                       Margin="10,5" />
-            <Button Command="{Binding CancelCommand}"
-                    Content="Cancel"
+                       Foreground="White"
+                       Text="Loading..." />
+            <Button Margin="10,5"
+                    Padding="10,3"
                     VerticalAlignment="Center"
-                    Margin="10,5"
-                    Padding="10,3" />
+                    Command="{Binding CancelCommand}"
+                    Content="Cancel" />
         </StackPanel>
-        
+
     </Grid>
-    
+
 </Window>
