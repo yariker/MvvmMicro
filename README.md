@@ -5,10 +5,10 @@ A clean and lightweight MVVM framework for WPF, UWP and .NET Standard 2.0 inspir
 
 ## Goals
 - No third party dependencies, such as `CommonServiceLocator` or `System.Windows.Interactivity`.
-- Avoid [feature kreep](https://en.wikipedia.org/wiki/Feature_creep) – only core MVVM types and services are included, such as `RelayCommand`, `ObservableObject` and a simple `IMessenger`.
+- Avoid [feature kreep](https://en.wikipedia.org/wiki/Feature_creep) – only core MVVM types and services are included, such as `RelayCommand`, `AsyncRelayCommand`, `ObservableObject` and a simple `IMessenger`.
 
 ## Supported platforms
-- .NET Framework 4.6 & .NET 5.0 (WPF)
+- .NET Framework 4.6.2 & .NET 5.0 (WPF)
 - Universal Windows Platform (UWP)
 - .NET Standard 2.0
 
