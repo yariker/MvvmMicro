@@ -1,17 +1,26 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
   <Class Name="MvvmMicro.CommandBase">
-    <Position X="6.75" Y="0.75" Width="2.75" />
+    <Position X="7.5" Y="0.75" Width="2.75" />
+    <Members>
+      <Method Name="CastParameter" Hidden="true" />
+      <Method Name="ICommand.CanExecute" Hidden="true" />
+      <Method Name="ICommand.Execute" Hidden="true" />
+    </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAQAACAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAQAACAAQAEEQAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>CommandBase.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.Messenger">
-    <Position X="0.5" Y="2.75" Width="1.75" />
+    <Position X="0.5" Y="3" Width="2" />
     <Members>
+      <Field Name="_actionInvoker" Hidden="true" />
       <Field Name="_registry" Hidden="true" />
+      <Method Name="Publish" Hidden="true" />
+      <Method Name="Subscribe" Hidden="true" />
+      <Method Name="Unsubscribe" Hidden="true" />
     </Members>
     <NestedTypes>
       <Class Name="MvvmMicro.Messenger.Channel" Collapsed="true">
@@ -21,13 +30,13 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAEAAIAAAAAAiAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAEAAEAAIAAAAAAiAAAAQAAAAAAAAAA=</HashCode>
       <FileName>Messenger.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.192" />
   </Class>
   <Class Name="MvvmMicro.ObservableObject">
-    <Position X="2.75" Y="0.75" Width="3.5" />
+    <Position X="3" Y="0.75" Width="3.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAABAAAIAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ObservableObject.cs</FileName>
@@ -35,21 +44,30 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.ViewModelBase">
-    <Position X="3.5" Y="3.25" Width="2" />
+    <Position X="3" Y="3" Width="2" />
     <Members>
       <Method Name="GetIsInDesignMode" Hidden="true" />
       <Field Name="IsInDesignModeLazy" Hidden="true" />
+      <Method Name="ViewModelBase" Hidden="true" />
     </Members>
+    <InheritanceLine Type="MvvmMicro.ObservableObject" FixedFromPoint="true">
+      <Path>
+        <Point X="4" Y="2.497" />
+        <Point X="4" Y="3" />
+      </Path>
+    </InheritanceLine>
     <TypeIdentifier>
       <HashCode>AAAAAAAAABAAAAAAAAQAAAAAAASAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="MvvmMicro.RelayCommand">
-    <Position X="6" Y="3.5" Width="1.75" />
+    <Position X="5.75" Y="3.5" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
+      <Method Name="CanExecute" Hidden="true" />
+      <Method Name="Execute" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -57,45 +75,89 @@
     </TypeIdentifier>
   </Class>
   <Class Name="MvvmMicro.RelayCommand&lt;T&gt;">
-    <Position X="8.5" Y="3.5" Width="1.75" />
+    <Position X="9.25" Y="3.5" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
+      <Method Name="CanExecute" Hidden="true" />
+      <Method Name="Execute" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>RelayCommand`1.cs</FileName>
+      <FileName>RelayCommand{T}.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.AsyncRelayCommand">
-    <Position X="6" Y="5.5" Width="2" />
+    <Position X="5.75" Y="8" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
-      <Field Name="_isExecuting" Hidden="true" />
+      <Method Name="CanExecute" Hidden="true" />
+      <Method Name="ExecuteAsync" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEABAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAEAAAAAAAECAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>AsyncRelayCommand.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.AsyncRelayCommand&lt;T&gt;">
-    <Position X="8.5" Y="5.5" Width="2" />
+    <Position X="9.25" Y="8" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
+      <Method Name="CanExecute" Hidden="true" />
+      <Method Name="ExecuteAsync" Hidden="true" />
+      <Method Name="IAsyncCommand.ExecuteAsync" Hidden="true" />
+      <Method Name="ICommand&lt;T&gt;.Execute" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAFAAAAAAAECQAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>AsyncRelayCommand{T}.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="MvvmMicro.AsyncCommandBase">
+    <Position X="7.5" Y="5.25" Width="2.75" />
+    <Members>
+      <Field Name="_cancellationTokenSource" Hidden="true" />
       <Field Name="_isExecuting" Hidden="true" />
     </Members>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAEABAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>AsyncRelayCommand`1.cs</FileName>
+      <HashCode>AAAAAIAAQAABgAQAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>AsyncCommandBase.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Interface Name="MvvmMicro.IMessenger">
-    <Position X="0.5" Y="0.75" Width="1.75" />
+    <Position X="0.5" Y="0.75" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAACAAAAQAAAAAAAAAA=</HashCode>
       <FileName>IMessenger.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MvvmMicro.ICommand&lt;T&gt;">
+    <Position X="3" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ICommand{T}.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MvvmMicro.IAsyncCommand">
+    <Position X="0.5" Y="5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>IAsyncCommand.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="MvvmMicro.IAsyncCommand&lt;T&gt;">
+    <Position X="1.75" Y="7.75" Width="2" />
+    <Members>
+      <Method Name="ExecuteAsync" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>IAsyncCommand{T}.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Font Name="Segoe UI" Size="9" />

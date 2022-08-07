@@ -9,7 +9,7 @@ namespace MvvmMicro;
 /// An <see cref="ICommand"/> whose delegates take a strongly-typed parameter.
 /// </summary>
 /// <typeparam name="T">The type of the command argument.</typeparam>
-public class RelayCommand<T> : CommandBase
+public class RelayCommand<T> : CommandBase, ICommand<T>
 {
     private readonly Action<T> _execute;
     private readonly Func<T, bool> _canExecute;
@@ -27,18 +27,20 @@ public class RelayCommand<T> : CommandBase
     }
 
     /// <inheritdoc />
-    public override bool CanExecute(object parameter)
+    public bool CanExecute(T parameter) => _canExecute(parameter);
+
+    /// <inheritdoc />
+    public void Execute(T parameter)
     {
-        return _canExecute((T)parameter);
+        if (_canExecute(parameter))
+        {
+            _execute(parameter);
+        }
     }
 
     /// <inheritdoc />
-    public override void Execute(object parameter)
-    {
-        var typedParameter = (T)parameter;
-        if (_canExecute(typedParameter))
-        {
-            _execute(typedParameter);
-        }
-    }
+    protected override bool CanExecute(object parameter) => CanExecute(CastParameter<T>(parameter));
+
+    /// <inheritdoc />
+    protected override void Execute(object parameter) => Execute(CastParameter<T>(parameter));
 }

@@ -19,7 +19,7 @@ public class RelayCommandTest
     {
         var handler = new Mock<ICommandHandler>();
         var command = new RelayCommand(handler.Object.Execute);
-        Assert.True(command.CanExecute(null));
+        Assert.True(command.CanExecute());
     }
 
     [Theory]
@@ -31,7 +31,7 @@ public class RelayCommandTest
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
 
         var command = new RelayCommand(handler.Object.Execute, handler.Object.CanExecute);
-        Assert.Equal(canExecute, command.CanExecute(null));
+        Assert.Equal(canExecute, command.CanExecute());
 
         handler.Verify(h => h.CanExecute(), Times.Once);
     }
@@ -45,7 +45,7 @@ public class RelayCommandTest
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
 
         var command = new RelayCommand(handler.Object.Execute, handler.Object.CanExecute);
-        command.Execute(null);
+        command.Execute();
 
         handler.Verify(h => h.Execute(), canExecute ? Times.Once() : Times.Never());
     }

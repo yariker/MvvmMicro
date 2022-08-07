@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
 
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 using Moq;
 using Xunit;
@@ -12,7 +13,11 @@ public class AsyncRelayCommandTest
     [Fact]
     public void Ctor_Should_Verify_Arguments()
     {
-        Assert.Throws<ArgumentNullException>("execute", () => new AsyncRelayCommand(null));
+        Assert.Throws<ArgumentNullException>(
+            "execute", () => new AsyncRelayCommand((Func<Task>)null));
+
+        Assert.Throws<ArgumentNullException>(
+            "execute", () => new AsyncRelayCommand((Func<CancellationToken, Task>)null));
     }
 
     [Fact]
@@ -20,7 +25,7 @@ public class AsyncRelayCommandTest
     {
         var handler = new Mock<IAsyncCommandHandler>();
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync);
-        Assert.True(command.CanExecute(null));
+        Assert.True(command.CanExecute());
     }
 
     [Theory]
@@ -32,7 +37,7 @@ public class AsyncRelayCommandTest
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
 
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync, handler.Object.CanExecute);
-        Assert.Equal(canExecute, command.CanExecute(null));
+        Assert.Equal(canExecute, command.CanExecute());
 
         handler.Verify(h => h.CanExecute(), Times.Once);
     }
@@ -40,39 +45,36 @@ public class AsyncRelayCommandTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void Execute_Should_Invoke_Execute_Callback(bool canExecute)
+    public async Task Execute_Should_Invoke_Execute_Callback(bool canExecute)
     {
         var handler = new Mock<IAsyncCommandHandler>();
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
 
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync, handler.Object.CanExecute);
-        command.Execute(null);
+        await command.ExecuteAsync();
 
         handler.Verify(h => h.ExecuteAsync(), canExecute ? Times.Once() : Times.Never());
     }
 
     [Fact]
-    public void Execute_Should_Prevent_Reentrancy()
+    public void Execute_Should_Support_Reentrancy()
     {
         var taskCompletionSource = new TaskCompletionSource<bool>();
 
         var handler = new Mock<IAsyncCommandHandler>();
-        handler.Setup(h => h.ExecuteAsync()).Returns(taskCompletionSource.Task);
+        handler.SetupSequence(h => h.ExecuteAsync())
+               .Returns(taskCompletionSource.Task)
+               .Returns(taskCompletionSource.Task);
 
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync);
 
-        for (int i = 0; i < 4; i++)
-        {
-            command.Execute(null);
-        }
+        var task1 = command.ExecuteAsync();
+        Assert.False(task1.IsCompleted);
+        Assert.True(command.CanExecute());
 
-        Assert.False(command.CanExecute(null));
-        handler.Verify(h => h.ExecuteAsync(), Times.Once);
-
-        taskCompletionSource.SetResult(true);
-
-        Assert.True(command.CanExecute(null));
-        command.Execute(null);
+        var task2 = command.ExecuteAsync();
+        Assert.False(task2.IsCompleted);
+        Assert.True(command.CanExecute());
 
         handler.Verify(h => h.ExecuteAsync(), Times.Exactly(2));
     }

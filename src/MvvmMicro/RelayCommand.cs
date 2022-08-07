@@ -26,18 +26,21 @@ public class RelayCommand : CommandBase
         _canExecute = canExecute ?? (() => true);
     }
 
-    /// <inheritdoc />
-    public override bool CanExecute(object parameter)
-    {
-        return _canExecute();
-    }
+    /// <inheritdoc cref="ICommand.CanExecute" />
+    public bool CanExecute() => _canExecute();
 
-    /// <inheritdoc />
-    public override void Execute(object parameter)
+    /// <inheritdoc cref="ICommand.Execute" />
+    public void Execute()
     {
         if (_canExecute())
         {
             _execute();
         }
     }
+
+    /// <inheritdoc />
+    protected override bool CanExecute(object parameter) => CanExecute();
+
+    /// <inheritdoc />
+    protected override void Execute(object parameter) => Execute();
 }
