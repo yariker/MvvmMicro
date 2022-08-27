@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29503.13
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32819.101
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro", "src\MvvmMicro\MvvmMicro.csproj", "{81EEE276-4F2E-4B50-AF91-C021E31699BB}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro.Test", "src\MvvmMicro.Test\MvvmMicro.Test.csproj", "{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MvvmMicro.Tests", "src\MvvmMicro.Tests\MvvmMicro.Tests.csproj", "{E3B60707-40EA-45D1-A0A2-51F1D55A73D8}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9D8087C5-B368-485A-8BBE-A546ABC6EA5F}"
 	ProjectSection(SolutionItems) = preProject

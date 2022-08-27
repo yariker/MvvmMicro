@@ -11,7 +11,7 @@ namespace MvvmMicro.Test;
 public class AsyncRelayCommandGenericTest
 {
     [Fact]
-    public void Ctor_Should_Verify_Arguments()
+    public void Ctor_VerifiesArguments()
     {
         Assert.Throws<ArgumentNullException>(
             "execute", () => new AsyncRelayCommand<string>((Func<string, Task>)null));
@@ -21,7 +21,7 @@ public class AsyncRelayCommandGenericTest
     }
 
     [Fact]
-    public void Ctor_Should_Provide_Default_CanExecute_Callback()
+    public void Ctor_ProvidesDefaultCanExecuteCallback()
     {
         var handler = new Mock<IAsyncCommandHandler<string>>();
         var command = new AsyncRelayCommand<string>(handler.Object.ExecuteAsync);
@@ -31,7 +31,7 @@ public class AsyncRelayCommandGenericTest
     [Theory]
     [InlineData("Test1", true)]
     [InlineData("Test2", false)]
-    public void CanExecute_Should_Invoke_CanExecute_Callback(string parameter, bool canExecute)
+    public void CanExecute_InvokesCanExecuteCallback(string parameter, bool canExecute)
     {
         var handler = new Mock<IAsyncCommandHandler<string>>();
         handler.Setup(h => h.CanExecute(parameter)).Returns(canExecute);
@@ -45,7 +45,7 @@ public class AsyncRelayCommandGenericTest
     [Theory]
     [InlineData("Test1", true)]
     [InlineData("Test2", false)]
-    public async Task Execute_Should_Invoke_Execute_Callback(string parameter, bool canExecute)
+    public async Task Execute_InvokesExecuteCallback(string parameter, bool canExecute)
     {
         var handler = new Mock<IAsyncCommandHandler<string>>();
         handler.Setup(h => h.CanExecute(parameter)).Returns(canExecute);
@@ -57,7 +57,7 @@ public class AsyncRelayCommandGenericTest
     }
 
     [Fact]
-    public void Execute_Should_Support_Reentrancy()
+    public void Execute_SupportsReentrancy()
     {
         var taskCompletionSource = new TaskCompletionSource<bool>();
 
@@ -80,7 +80,7 @@ public class AsyncRelayCommandGenericTest
     }
 
     [Fact]
-    public void RaiseCanExecuteChanged_Should_Raise_CanExecuteChanged()
+    public void RaiseCanExecuteChanged_RaisesCanExecuteChanged()
     {
         var handler = new Mock<IEventHandler>();
         var command = new AsyncRelayCommand<string>(Mock.Of<Func<string, Task>>());

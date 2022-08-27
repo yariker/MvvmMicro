@@ -90,6 +90,8 @@ csharp_style_inlined_variable_declaration = true:none
 csharp_style_throw_expression = true:none
 csharp_style_conditional_delegate_call = true:suggestion
 
+[*]
+
 # SA1101: Prefix local calls with this
 dotnet_diagnostic.sa1101.severity = none
 
@@ -105,8 +107,8 @@ dotnet_diagnostic.sx1101.severity = warning
 # SX1309: Field names should begin with underscore
 dotnet_diagnostic.sx1309.severity = warning
 
-# SA0001: XML comment analysis disabled
-dotnet_diagnostic.sa0001.severity = none
-
 # SA1141: Use tuple syntax
 dotnet_diagnostic.SA1141.severity = none
+
+# SA0001: XML comment analysis disabled
+dotnet_diagnostic.SA0001.severity = none

@@ -9,13 +9,13 @@ namespace MvvmMicro.Test;
 public class RelayCommandTest
 {
     [Fact]
-    public void Ctor_Should_Verify_Arguments()
+    public void Ctor_VerifiesArguments()
     {
         Assert.Throws<ArgumentNullException>("execute", () => new RelayCommand(null));
     }
 
     [Fact]
-    public void Ctor_Should_Provide_Default_CanExecute_Callback()
+    public void Ctor_ProvidesDefaultCanExecuteCallback()
     {
         var handler = new Mock<ICommandHandler>();
         var command = new RelayCommand(handler.Object.Execute);
@@ -25,7 +25,7 @@ public class RelayCommandTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void CanExecute_Should_Invoke_CanExecute_Callback(bool canExecute)
+    public void CanExecute_InvokesCanExecuteCallback(bool canExecute)
     {
         var handler = new Mock<ICommandHandler>();
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
@@ -39,7 +39,7 @@ public class RelayCommandTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void Execute_Should_Invoke_Execute_Callback(bool canExecute)
+    public void Execute_InvokesExecuteCallback(bool canExecute)
     {
         var handler = new Mock<ICommandHandler>();
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
@@ -51,7 +51,7 @@ public class RelayCommandTest
     }
 
     [Fact]
-    public void RaiseCanExecuteChanged_Should_Raise_CanExecuteChanged()
+    public void RaiseCanExecuteChanged_RaisesCanExecuteChanged()
     {
         var handler = new Mock<IEventHandler>();
         var command = new RelayCommand(Mock.Of<Action>());

@@ -11,7 +11,7 @@ namespace MvvmMicro.Test;
 public class AsyncRelayCommandTest
 {
     [Fact]
-    public void Ctor_Should_Verify_Arguments()
+    public void Ctor_VerifiesArguments()
     {
         Assert.Throws<ArgumentNullException>(
             "execute", () => new AsyncRelayCommand((Func<Task>)null));
@@ -21,7 +21,7 @@ public class AsyncRelayCommandTest
     }
 
     [Fact]
-    public void Ctor_Should_Provide_Default_CanExecute_Callback()
+    public void Ctor_ProvidesDefaultCanExecuteCallback()
     {
         var handler = new Mock<IAsyncCommandHandler>();
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync);
@@ -31,7 +31,7 @@ public class AsyncRelayCommandTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public void CanExecute_Should_Invoke_CanExecute_Callback(bool canExecute)
+    public void CanExecute_InvokesCanExecuteCallback(bool canExecute)
     {
         var handler = new Mock<IAsyncCommandHandler>();
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
@@ -45,7 +45,7 @@ public class AsyncRelayCommandTest
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task Execute_Should_Invoke_Execute_Callback(bool canExecute)
+    public async Task Execute_InvokesExecuteCallback(bool canExecute)
     {
         var handler = new Mock<IAsyncCommandHandler>();
         handler.Setup(h => h.CanExecute()).Returns(canExecute);
@@ -57,7 +57,7 @@ public class AsyncRelayCommandTest
     }
 
     [Fact]
-    public void Execute_Should_Support_Reentrancy()
+    public void Execute_SupportsReentrancy()
     {
         var taskCompletionSource = new TaskCompletionSource<bool>();
 
@@ -80,7 +80,7 @@ public class AsyncRelayCommandTest
     }
 
     [Fact]
-    public void RaiseCanExecuteChanged_Should_Raise_CanExecuteChanged()
+    public void RaiseCanExecuteChanged_RaisesCanExecuteChanged()
     {
         var handler = new Mock<IEventHandler>();
         var command = new AsyncRelayCommand(Mock.Of<Func<Task>>());

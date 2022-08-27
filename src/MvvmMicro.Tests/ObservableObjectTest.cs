@@ -8,21 +8,21 @@ namespace MvvmMicro.Test;
 public class ObservableObjectTest : ObservableObject
 {
     [Fact]
-    public void OnPropertyChanged_Should_Raise_PropertyChanged()
+    public void OnPropertyChanged_RaisesPropertyChanged()
     {
         const string propertyName = "TestProperty";
         Assert.PropertyChanged(this, propertyName, () => OnPropertyChanged(propertyName));
     }
 
     [Fact]
-    public void Set_Should_Verify_Arguments()
+    public void Set_VerifiesArguments()
     {
         string testField = null;
         Assert.Throws<ArgumentNullException>("propertyName", () => Set(ref testField, null, null));
     }
 
     [Fact]
-    public void Set_Should_Raise_PropertyChanged()
+    public void Set_RaisesPropertyChanged()
     {
         const string propertyName = "TestProperty";
         const string testValue = "TestValue";
@@ -31,7 +31,7 @@ public class ObservableObjectTest : ObservableObject
     }
 
     [Fact]
-    public void Set_Should_Change_Field_Value()
+    public void Set_ChangesFieldValue()
     {
         const string propertyName = "TestProperty";
         const string testValue = "TestValue";

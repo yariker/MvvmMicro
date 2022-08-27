@@ -18,7 +18,7 @@ namespace MvvmMicro;
 ///     <item>
 ///         <description>
 ///             The subscribers are kept as weak references, which allows them to be garbage collected
-///             even without an explicit <see cref="Unsubscribe(object)"/> call.
+///             even without an explicit <see cref="Unregister"/> call.
 ///         </description>
 ///     </item>
 ///     <item>
@@ -45,7 +45,7 @@ public class Messenger : IMessenger
     public static IMessenger Default { get; } = new Messenger();
 
     /// <inheritdoc />
-    public void Publish<T>(T message)
+    public void Send<T>(T message)
     {
         var type = ReflectionCache<T>.Type;
         var callbackList = _callbackListPool.Get();
@@ -78,7 +78,7 @@ public class Messenger : IMessenger
     }
 
     /// <inheritdoc />
-    public void Subscribe<T>(object subscriber, Action<T> callback)
+    public void Register<T>(object subscriber, Action<T> callback)
     {
         if (subscriber == null)
         {
@@ -104,7 +104,7 @@ public class Messenger : IMessenger
     }
 
     /// <inheritdoc />
-    public void Unsubscribe(object subscriber)
+    public void Unregister(object subscriber)
     {
         if (subscriber == null)
         {

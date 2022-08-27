@@ -12,38 +12,38 @@ namespace MvvmMicro.Test;
 public class MessengerTest
 {
     [Fact]
-    public void Subscribe_Should_Verify_Arguments()
+    public void Register_VerifiesArguments()
     {
         var messenger = new Messenger();
 
         Assert.Throws<ArgumentNullException>(
             "subscriber",
-            () => messenger.Subscribe(null, Mock.Of<Action<string>>()));
+            () => messenger.Register(null, Mock.Of<Action<string>>()));
 
         Assert.Throws<ArgumentNullException>(
             "callback",
-            () => messenger.Subscribe<string>(Mock.Of<object>(), null));
+            () => messenger.Register<string>(Mock.Of<object>(), null));
     }
 
     [Fact]
-    public void Subscribe_Should_Register_Subscriber_Callback()
+    public void Register_RegistersSubscriberCallback()
     {
         const string notification = "Message";
         var messenger = new Messenger();
         var subscriberMock = new Mock<ISubscriber<string>>();
-        messenger.Subscribe<string>(subscriberMock.Object, subscriberMock.Object.Callback);
-        messenger.Publish(notification);
+        messenger.Register<string>(subscriberMock.Object, subscriberMock.Object.Callback);
+        messenger.Send(notification);
         subscriberMock.Verify(s => s.Callback(notification), Times.Once);
     }
 
     [Fact]
-    public void Subscribe_Should_Not_Hold_Strong_Reference_To_Subscriber()
+    public void Register_DoesNotHoldStrongReferenceToSubscriber()
     {
         var messenger = new Messenger();
         var (subscriberWeak, releaseSignal, releasedEvent) = GetCollectableInstance(() =>
         {
             var instance = Mock.Of<ISubscriber<string>>();
-            messenger.Subscribe<string>(instance, instance.Callback);
+            messenger.Register<string>(instance, instance.Callback);
             return instance;
         });
 
@@ -57,7 +57,7 @@ public class MessengerTest
     }
 
     [Fact]
-    public void Subscribe_Should_Keep_Callback_Alive()
+    public void Register_KeepsCallbackAlive()
     {
         var messenger = new Messenger();
         var subscriber = new object();
@@ -65,7 +65,7 @@ public class MessengerTest
         var (callbackWeak, releaseSignal, releasedEvent) = GetCollectableInstance(() =>
         {
             var callback = Mock.Of<Action<string>>();
-            messenger.Subscribe(subscriber, callback);
+            messenger.Register(subscriber, callback);
             return callback;
         });
 
@@ -80,7 +80,7 @@ public class MessengerTest
     }
 
     [Fact]
-    public void Publish_Should_Send_Message_To_Appropriate_Subscriber()
+    public void Send_DeliversMessageToAppropriateSubscriber()
     {
         var messenger = new Messenger();
 
@@ -88,17 +88,17 @@ public class MessengerTest
         var subscriber2 = new Mock<ISubscriber<string>>();
         var subscriber3 = new Mock<ISubscriber<int>>();
 
-        messenger.Subscribe<object>(subscriber1.Object, subscriber1.Object.Callback);
-        messenger.Subscribe<string>(subscriber2.Object, subscriber2.Object.Callback);
-        messenger.Subscribe<int>(subscriber3.Object, subscriber3.Object.Callback);
+        messenger.Register<object>(subscriber1.Object, subscriber1.Object.Callback);
+        messenger.Register<string>(subscriber2.Object, subscriber2.Object.Callback);
+        messenger.Register<int>(subscriber3.Object, subscriber3.Object.Callback);
 
         var message1 = new object();
         const string message2 = "Message";
         const int message3 = 42;
 
-        messenger.Publish(message1);
-        messenger.Publish(message2);
-        messenger.Publish(message3);
+        messenger.Send(message1);
+        messenger.Send(message2);
+        messenger.Send(message3);
 
         subscriber1.Verify(s => s.Callback(It.IsAny<object>()), Times.Exactly(3));
         subscriber1.Verify(s => s.Callback(message1), Times.Once);
@@ -113,21 +113,21 @@ public class MessengerTest
     }
 
     [Fact]
-    public void Unsubscribe_Should_Verify_Arguments()
+    public void Unregister_VerifiesArguments()
     {
         var messenger = new Messenger();
-        Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Unsubscribe(null));
+        Assert.Throws<ArgumentNullException>("subscriber", () => messenger.Unregister(null));
     }
 
     [Fact]
-    public void Unsubscribe_Should_Unregister_Subscriber_Callbacks()
+    public void Unregister_UnregistersSubscriberCallbacks()
     {
         const string notification = "Message";
         var messenger = new Messenger();
         var subscriberMock = new Mock<ISubscriber<string>>();
-        messenger.Subscribe<string>(subscriberMock.Object, subscriberMock.Object.Callback);
-        messenger.Unsubscribe(subscriberMock.Object);
-        messenger.Publish(notification);
+        messenger.Register<string>(subscriberMock.Object, subscriberMock.Object.Callback);
+        messenger.Unregister(subscriberMock.Object);
+        messenger.Send(notification);
         subscriberMock.Verify(s => s.Callback(notification), Times.Never);
     }
 
