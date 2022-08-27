@@ -26,6 +26,9 @@ public class ViewModelBase : ObservableObject
     /// <summary>
     /// Gets a value indicating whether the application is running in the context of a designer.
     /// </summary>
+    /// <remarks>
+    /// Supported for WPF and UWP targets only; otherwise, always returns <c>false</c>.
+    /// </remarks>
     public static bool IsInDesignMode => IsInDesignModeLazy.Value;
 
     /// <summary>

@@ -88,6 +88,10 @@ public class AsyncRelayCommandGenericTest
 
         command.RaiseCanExecuteChanged();
 
-        handler.Verify(h => h.EventHandler(command, EventArgs.Empty), Times.Once);
+#if NETFRAMEWORK
+        DispatcherHelper.DoEvents();
+#endif
+
+        handler.Verify(h => h.EventHandler(It.IsAny<object>(), EventArgs.Empty), Times.Once);
     }
 }

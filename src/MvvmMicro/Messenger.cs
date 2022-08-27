@@ -37,6 +37,7 @@ public class Messenger : IMessenger
 {
     private readonly ActionInvoker _actionInvoker = new();
     private readonly Dictionary<Type, Channel> _registry = new();
+    private readonly ListPool<List<Delegate>> _callbackListPool = new();
 
     /// <summary>
     /// Gets the default instance of the <see cref="Messenger" />.
@@ -47,25 +48,32 @@ public class Messenger : IMessenger
     public void Publish<T>(T message)
     {
         var type = ReflectionCache<T>.Type;
-        var callbackLists = new List<List<Delegate>>();
+        var callbackList = _callbackListPool.Get();
 
-        lock (_registry)
+        try
         {
-            foreach (KeyValuePair<Type, Channel> entry in _registry)
+            lock (_registry)
             {
-                if (entry.Key.IsAssignableFrom(type))
+                foreach (KeyValuePair<Type, Channel> entry in _registry)
                 {
-                    entry.Value.GetCallbacks(callbackLists);
+                    if (entry.Key.IsAssignableFrom(type))
+                    {
+                        entry.Value.GetCallbacks(callbackList);
+                    }
+                }
+            }
+
+            foreach (List<Delegate> callbacks in callbackList)
+            {
+                foreach (Delegate callback in callbacks)
+                {
+                    _actionInvoker.Invoke(callback, message);
                 }
             }
         }
-
-        foreach (List<Delegate> callbacks in callbackLists)
+        finally
         {
-            foreach (Delegate callback in callbacks)
-            {
-                _actionInvoker.Invoke(callback, message);
-            }
+            _callbackListPool.Return(callbackList);
         }
     }
 

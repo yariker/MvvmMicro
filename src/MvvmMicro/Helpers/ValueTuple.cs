@@ -1,15 +1,17 @@
 ﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
 
+#if NETFRAMEWORK
+
 using System;
 using System.Collections.Generic;
 
 namespace MvvmMicro.Helpers;
 
-#if NETFRAMEWORK
-
-/// <remarks>
+/// <summary>
 /// Represents a value tuple with 2 components.
-/// </remarks>
+/// </summary>
+/// <typeparam name="T1">Type of <see cref="Item1"/>.</typeparam>
+/// <typeparam name="T2">Type of <see cref="Item2"/>.</typeparam>
 internal struct ValueTuple<T1, T2> : IEquatable<ValueTuple<T1, T2>>
 {
     public T1 Item1;
