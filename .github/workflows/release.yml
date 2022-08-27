@@ -2,7 +2,8 @@ name: Release
 
 on:
   push:
-    tags: ['v*']
+    tags:
+      - "v*.*.*"
 
 jobs:
   build:
@@ -23,7 +24,7 @@ jobs:
       uses: actions/upload-artifact@v1
       with:
         name: binaries
-        path: src/MvvmMicro/bin/Release    
+        path: src/MvvmMicro/bin/Release
     - name: Upload package
       uses: actions/upload-artifact@v1
       with:
@@ -32,3 +33,8 @@ jobs:
     - uses: nuget/setup-nuget@v1
     - name: Publish package
       run: nuget push package\*.nupkg -source https://www.nuget.org -apikey $Env:NUGET_API_KEY
+    - name: Release
+      uses: softprops/action-gh-release@v1
+      with:
+        prerelease: ${{ contains(github.ref_name, '-') }}
+        files: package\*.nupkg
