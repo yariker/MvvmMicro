@@ -15,7 +15,7 @@ public partial class MainWindow : Window
 
     private void Window_Loaded(object sender, RoutedEventArgs e)
     {
-        Messenger.Default.Subscribe<string>(this, message =>
+        Messenger.Default.Register<string>(this, message =>
         {
             if (message == Notifications.CloseWindow)
             {

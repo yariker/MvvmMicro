@@ -53,7 +53,7 @@ public class AsyncRelayCommandTest
         var command = new AsyncRelayCommand(handler.Object.ExecuteAsync, handler.Object.CanExecute);
         await command.ExecuteAsync();
 
-        handler.Verify(h => h.ExecuteAsync(), canExecute ? Times.Once() : Times.Never());
+        handler.Verify(h => h.ExecuteAsync(), canExecute ? Times.Once : Times.Never);
     }
 
     [Fact]

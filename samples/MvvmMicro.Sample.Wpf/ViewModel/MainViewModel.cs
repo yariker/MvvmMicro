@@ -59,7 +59,7 @@ public class MainViewModel : ViewModelBase
         {
             if (Facts.Count == 0)
             {
-                Messenger.Publish(Notifications.CloseWindow);
+                Messenger.Send(Notifications.CloseWindow);
             }
         }
     }

@@ -47,7 +47,7 @@ public class RelayCommandTest
         var command = new RelayCommand(handler.Object.Execute, handler.Object.CanExecute);
         command.Execute();
 
-        handler.Verify(h => h.Execute(), canExecute ? Times.Once() : Times.Never());
+        handler.Verify(h => h.Execute(), canExecute ? Times.Once : Times.Never);
     }
 
     [Fact]
