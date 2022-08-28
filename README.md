@@ -26,13 +26,13 @@ Install-Package MvvmMicro
 
 | Type | Description |
 | ----- | ----------- |
-| ObservableObject | The base class for objects that support property change notification. |
-| ViewModelBase | The base class for view models with the _Messenger_ and _IsInDesignMode_ properties. |
-| Messenger | A service for sending and receiving messages, typically between view models and views. |
-| RelayCommand,<br/>RelayCommand\<T\> | An _ICommand_ implementation based on a synchronous delegate for _Execute_ and _CanExecute_. |
-| AsyncRelayCommand,<br/>AsyncRelayCommand\<T\> | An _ICommand_ implementation based on an asynchronous delegate for _Execute_ with cancellation support. |
+| `ObservableObject` | The base class for objects that support property change notification. |
+| `ViewModelBase` | The base class for view models with the `Messenger` and `IsInDesignMode` properties. |
+| `Messenger` | A service for sending and receiving messages, typically between view models and views. |
+| `RelayCommand`,<br/>`RelayCommand<T>` | An `ICommand` implementation based on a synchronous delegate for `Execute` and `CanExecute`. |
+| `AsyncRelayCommand`,<br/>`AsyncRelayCommand<T>` | An `ICommand` implementation based on an asynchronous delegate for `Execute` with cancellation support. |
 
-Also check out the [Class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png).
+Also check out the [class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png).
 
 ## License
 
