@@ -14,13 +14,11 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.Messenger">
-    <Position X="0.5" Y="3" Width="2" />
+    <Position X="0.5" Y="2.75" Width="2" />
     <Members>
       <Field Name="_actionInvoker" Hidden="true" />
+      <Field Name="_callbackListPool" Hidden="true" />
       <Field Name="_registry" Hidden="true" />
-      <Method Name="Publish" Hidden="true" />
-      <Method Name="Subscribe" Hidden="true" />
-      <Method Name="Unsubscribe" Hidden="true" />
     </Members>
     <NestedTypes>
       <Class Name="MvvmMicro.Messenger.Channel" Collapsed="true">
@@ -30,7 +28,7 @@
       </Class>
     </NestedTypes>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAEAAEAAIAAAAAAiAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAQAAAAAAEAAEAAIAAAAAAhAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Messenger.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.192" />
@@ -44,20 +42,24 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.ViewModelBase">
-    <Position X="3" Y="3" Width="2" />
+    <Position X="3" Y="2.75" Width="2" />
     <Members>
       <Method Name="GetIsInDesignMode" Hidden="true" />
+      <Method Name="GetIsInDesignMode_Avalonia" Hidden="true" />
+      <Method Name="GetIsInDesignMode_UWP" Hidden="true" />
+      <Method Name="GetIsInDesignMode_WPF" Hidden="true" />
+      <Method Name="GetIsInDesignMode_XamarinForms" Hidden="true" />
       <Field Name="IsInDesignModeLazy" Hidden="true" />
       <Method Name="ViewModelBase" Hidden="true" />
     </Members>
     <InheritanceLine Type="MvvmMicro.ObservableObject" FixedFromPoint="true">
       <Path>
         <Point X="4" Y="2.497" />
-        <Point X="4" Y="3" />
+        <Point X="4" Y="2.75" />
       </Path>
     </InheritanceLine>
     <TypeIdentifier>
-      <HashCode>AAAAAAAAABAAAAAAAAQAAAAAAASAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAFAAAgAAAgQAAAAAAASAAAQAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModelBase.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -68,6 +70,7 @@
       <Field Name="_execute" Hidden="true" />
       <Method Name="CanExecute" Hidden="true" />
       <Method Name="Execute" Hidden="true" />
+      <Method Name="RelayCommand" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -81,6 +84,7 @@
       <Field Name="_execute" Hidden="true" />
       <Method Name="CanExecute" Hidden="true" />
       <Method Name="Execute" Hidden="true" />
+      <Method Name="RelayCommand" Hidden="true" />
     </Members>
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAQAAECAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
@@ -89,10 +93,11 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.AsyncRelayCommand">
-    <Position X="5.75" Y="8" Width="2.75" />
+    <Position X="5.75" Y="7.75" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
+      <Method Name="AsyncRelayCommand" Hidden="true" />
       <Method Name="CanExecute" Hidden="true" />
       <Method Name="ExecuteAsync" Hidden="true" />
     </Members>
@@ -103,10 +108,11 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.AsyncRelayCommand&lt;T&gt;">
-    <Position X="9.25" Y="8" Width="2.75" />
+    <Position X="9.25" Y="7.75" Width="2.75" />
     <Members>
       <Field Name="_canExecute" Hidden="true" />
       <Field Name="_execute" Hidden="true" />
+      <Method Name="AsyncRelayCommand" Hidden="true" />
       <Method Name="CanExecute" Hidden="true" />
       <Method Name="ExecuteAsync" Hidden="true" />
       <Method Name="IAsyncCommand.ExecuteAsync" Hidden="true" />
@@ -119,7 +125,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="MvvmMicro.AsyncCommandBase">
-    <Position X="7.5" Y="5.25" Width="2.75" />
+    <Position X="7.5" Y="4.75" Width="2.75" />
     <Members>
       <Field Name="_cancellationTokenSource" Hidden="true" />
       <Field Name="_isExecuting" Hidden="true" />
@@ -132,19 +138,19 @@
   <Interface Name="MvvmMicro.IMessenger">
     <Position X="0.5" Y="0.75" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAACAAAAQAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAEAAAAAAAAABAAAAAAAAAAAAEAA=</HashCode>
       <FileName>IMessenger.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MvvmMicro.ICommand&lt;T&gt;">
-    <Position X="3" Y="5" Width="2" />
+    <Position X="3" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAQAAEAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ICommand{T}.cs</FileName>
     </TypeIdentifier>
   </Interface>
   <Interface Name="MvvmMicro.IAsyncCommand">
-    <Position X="0.5" Y="5" Width="2" />
+    <Position X="0.5" Y="5.25" Width="2" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAQAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAEA=</HashCode>
       <FileName>IAsyncCommand.cs</FileName>
