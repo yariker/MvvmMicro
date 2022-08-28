@@ -32,7 +32,7 @@ Install-Package MvvmMicro
 | RelayCommand,<br/>RelayCommand\<T\> | An _ICommand_ implementation based on a synchronous delegate for _Execute_ and _CanExecute_. |
 | AsyncRelayCommand,<br/>AsyncRelayCommand\<T\> | An _ICommand_ implementation based on an asynchronous delegate for _Execute_ with cancellation support. |
 
-![Class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png)
+Also check out the [Class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png).
 
 ## License
 
