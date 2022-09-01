@@ -14,6 +14,7 @@ public abstract class AsyncCommandBase : CommandBase
 {
     private CancellationTokenSource _cancellationTokenSource;
     private bool _isExecuting;
+    private int _executeCounter;
 
     /// <inheritdoc cref="IAsyncCommand.IsExecuting"/> />
     public bool IsExecuting
@@ -58,7 +59,10 @@ public abstract class AsyncCommandBase : CommandBase
 
         async Task ExecuteAsyncInternal()
         {
-            IsExecuting = true;
+            if (_executeCounter++ == 0)
+            {
+                IsExecuting = true;
+            }
 
             using var cancellationTokenSource = new CancellationTokenSource();
             _cancellationTokenSource = cancellationTokenSource;
@@ -74,7 +78,10 @@ public abstract class AsyncCommandBase : CommandBase
                     _cancellationTokenSource = null;
                 }
 
-                IsExecuting = false;
+                if (--_executeCounter == 0)
+                {
+                    IsExecuting = false;
+                }
             }
         }
     }

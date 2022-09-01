@@ -1,6 +1,7 @@
 ﻿// Copyright (c) Yaroslav Bugaria. All rights reserved.
 
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Moq;
@@ -93,5 +94,45 @@ public class AsyncRelayCommandTest
 #endif
 
         handler.Verify(h => h.EventHandler(It.IsAny<object>(), EventArgs.Empty), Times.Once);
+    }
+
+    [Theory]
+    [InlineData(0)]
+    [InlineData(1)]
+    [InlineData(2)]
+    public async Task IsExecuting_ReturnsCorrectStatus(int executes)
+    {
+        var taskSources = new List<TaskCompletionSource<bool>>();
+        var tasks = new List<Task>();
+
+        var command = new AsyncRelayCommand(() =>
+        {
+            var tcs = new TaskCompletionSource<bool>();
+            taskSources.Add(tcs);
+            return tcs.Task;
+        });
+
+        Assert.False(command.IsExecuting);
+
+        for (int i = 0; i < executes; i++)
+        {
+            tasks.Add(command.ExecuteAsync());
+            Assert.True(command.IsExecuting);
+        }
+
+        for (int i = 0; i < executes; i++)
+        {
+            taskSources[i].SetResult(true);
+            await tasks[i];
+
+            if (i < executes - 1)
+            {
+                Assert.True(command.IsExecuting);
+            }
+            else
+            {
+                Assert.False(command.IsExecuting);
+            }
+        }
     }
 }
