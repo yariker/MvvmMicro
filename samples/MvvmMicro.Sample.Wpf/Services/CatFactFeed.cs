@@ -14,17 +14,15 @@ namespace MvvmMicro.Sample.Wpf.Services;
 
 public sealed class CatFactFeed : ICatFactFeed, IDisposable
 {
-    private static readonly Uri RandomPictureUri = new("https://cataas.com/cat");
-
     private readonly HttpClient _client = new()
     {
         MaxResponseContentBufferSize = 5 * 1024 * 1024,
-        Timeout = TimeSpan.FromSeconds(15),
+        Timeout = TimeSpan.FromSeconds(30),
     };
 
     static CatFactFeed()
     {
-        ServicePointManager.DefaultConnectionLimit = 10;
+        ServicePointManager.DefaultConnectionLimit = 5;
     }
 
     public async Task<Fact[]> GetFactsAsync(int amount, CancellationToken cancellationToken)
@@ -34,7 +32,7 @@ public sealed class CatFactFeed : ICatFactFeed, IDisposable
         var facts = await _client.GetFromJsonAsync<Fact[]>(uri, cancellationToken) ?? Array.Empty<Fact>();
 
         // Download pictures (in parallel).
-        var pictures = facts.Select(_ => _client.GetStreamAsync(RandomPictureUri, cancellationToken)).ToArray();
+        var pictures = facts.Select(_ => GetPictureAsync(cancellationToken)).ToArray();
         await Task.WhenAll(pictures);
 
         // Assign pictures.
@@ -44,6 +42,17 @@ public sealed class CatFactFeed : ICatFactFeed, IDisposable
         }
 
         return facts;
+    }
+
+    private async Task<Stream> GetPictureAsync(CancellationToken cancellationToken)
+    {
+        var picture = await _client.GetFromJsonAsync<Picture>("https://aws.random.cat/meow", cancellationToken)
+                                   .ConfigureAwait(false);
+
+        var stream = await _client.GetStreamAsync(picture.File, cancellationToken)
+                                  .ConfigureAwait(false);
+
+        return stream;
     }
 
     public void Dispose()
