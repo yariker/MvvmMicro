@@ -53,7 +53,8 @@
                        Focusable="True"
                        LastChildFill="True">
                 <DockPanel.Background>
-                    <ImageBrush ImageSource="{Binding Picture}"
+                    <ImageBrush x:Name="ImageBrush"
+                                ImageSource="{Binding Picture}"
                                 Opacity="0.15"
                                 Stretch="UniformToFill" />
                 </DockPanel.Background>
@@ -87,7 +88,6 @@
         <ItemsControl ItemTemplate="{StaticResource FactTemplate}"
                       ItemsSource="{Binding Facts}"
                       Style="{StaticResource ListBoxStyle}" />
-
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Top"
                     Background="#990000FF"

@@ -46,12 +46,8 @@ public sealed class CatFactFeed : ICatFactFeed, IDisposable
 
     private async Task<Stream> GetPictureAsync(CancellationToken cancellationToken)
     {
-        var picture = await _client.GetFromJsonAsync<Picture>("https://aws.random.cat/meow", cancellationToken)
-                                   .ConfigureAwait(false);
-
-        var stream = await _client.GetStreamAsync(picture.File, cancellationToken)
+        var stream = await _client.GetStreamAsync("https://cataas.com/cat", cancellationToken)
                                   .ConfigureAwait(false);
-
         return stream;
     }
 
