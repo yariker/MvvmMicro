@@ -1,35 +1,35 @@
 ﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;net462;net5.0-windows;uap10.0.19041</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;net462;net6.0-windows;uap10.0.19041</TargetFrameworks>
     <AssemblyName>MvvmMicro</AssemblyName>
     <RootNamespace>MvvmMicro</RootNamespace>
-	  <Authors>Yaroslav Bugaria</Authors>
-	  <Product>MvvmMicro</Product>
-	  <Description>A clean and lightweight MVVM framework for WPF, UWP and .NET Standard inspired by MVVM Light Toolkit.</Description>
-	  <Copyright>(c) Yaroslav Bugaria, $([System.DateTime]::Now.ToString(yyyy))</Copyright>
-	  <GenerateDocumentationFile>true</GenerateDocumentationFile>
-	  <NeutralLanguage>en-US</NeutralLanguage>
-	  <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
-	  <SignAssembly>true</SignAssembly>
-	  <LangVersion>10.0</LangVersion>
+    <Authors>Yaroslav Bugaria</Authors>
+    <Product>MvvmMicro</Product>
+    <Description>A clean and lightweight MVVM framework for WPF, UWP and .NET Standard inspired by MVVM Light Toolkit.</Description>
+    <Copyright>(c) Yaroslav Bugaria, $([System.DateTime]::Now.ToString(yyyy))</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <AssemblyOriginatorKeyFile>MvvmMicro.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <LangVersion>10.0</LangVersion>
     <Nullable>warnings</Nullable>
   </PropertyGroup>
 
   <PropertyGroup>
-	  <IsPackable>true</IsPackable>
-	  <PackageId>MvvmMicro</PackageId>
-	  <PackageIcon>icon.png</PackageIcon>
-	  <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-	  <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
-	  <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
-	  <RepositoryType>git</RepositoryType>
-	  <PackageTags>mvvm wpf uwp xamarin-forms</PackageTags>
-	  <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <IsPackable>true</IsPackable>
+    <PackageId>MvvmMicro</PackageId>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>mvvm wpf uwp xamarin-forms</PackageTags>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
   </PropertyGroup>
 
   <!-- Reference WPF libraries on .NET Framework & .NET 5. -->
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net462' Or '$(TargetFramework)' == 'net5.0-windows'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net462' Or '$(TargetFramework)' == 'net6.0-windows'">
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
@@ -48,5 +48,5 @@
       <PackagePath></PackagePath>
     </None>
   </ItemGroup>
-  
+
 </Project>
