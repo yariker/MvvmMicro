@@ -49,7 +49,7 @@ public class ViewModelBase : ObservableObject
 
     private static bool? GetIsInDesignMode_WPF()
     {
-#if NETFRAMEWORK || NET5_0
+#if NETFRAMEWORK || NET8_0
         var descriptor = System.ComponentModel.DependencyPropertyDescriptor.FromProperty(
             System.ComponentModel.DesignerProperties.IsInDesignModeProperty, typeof(System.Windows.FrameworkElement));
 

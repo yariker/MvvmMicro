@@ -12,17 +12,11 @@ namespace MvvmMicro.Helpers;
 /// </summary>
 /// <typeparam name="T1">Type of <see cref="Item1"/>.</typeparam>
 /// <typeparam name="T2">Type of <see cref="Item2"/>.</typeparam>
-internal struct ValueTuple<T1, T2> : IEquatable<ValueTuple<T1, T2>>
+internal struct ValueTuple<T1, T2>(T1 item1, T2 item2) : IEquatable<ValueTuple<T1, T2>>
 {
-    public T1 Item1;
+    public T1 Item1 = item1;
 
-    public T2 Item2;
-
-    public ValueTuple(T1 item1, T2 item2)
-    {
-        Item1 = item1;
-        Item2 = item2;
-    }
+    public T2 Item2 = item2;
 
     public static bool operator ==(ValueTuple<T1, T2> left, ValueTuple<T1, T2> right)
     {

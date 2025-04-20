@@ -11,7 +11,7 @@ A lightweight MVVM framework for .NET inspired by [MVVM Light Toolkit](https://g
 
 ## Supported platforms
 
-- .NET Framework 4.6.2 & .NET 6.0 (WPF)
+- .NET Framework 4.7.2 & .NET 8.0 (WPF)
 - .NET Standard 2.0 (Xamarin.Forms, Avalonia, MAUI, etc.)
 - Universal Windows Platform (UWP)
 

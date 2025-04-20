@@ -12,29 +12,29 @@ jobs:
       NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
-    - uses: actions/checkout@v2.4.2
+    - uses: actions/checkout@v4.2.2
       with:
         fetch-depth: 0
         lfs: true
-    - uses: microsoft/setup-msbuild@v1.1.3
-    - uses: actions/setup-dotnet@v1.5.0
+    - uses: microsoft/setup-msbuild@v2
+    - uses: actions/setup-dotnet@v3.4.2
     - name: Build
       run: .\build.ps1 -Version $Env:GITHUB_REF.Replace('refs/tags/v', '') -Pack
     - name: Upload binaries
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v4.6.2
       with:
         name: binaries
         path: src/MvvmMicro/bin/Release
     - name: Upload package
-      uses: actions/upload-artifact@v3.1.2
+      uses: actions/upload-artifact@v4.6.2
       with:
         name: package
         path: package
-    - uses: nuget/setup-nuget@v1.1.1
+    - uses: NuGet/setup-nuget@v2.0.0
     - name: Publish package
       run: nuget push package\*.nupkg -source https://www.nuget.org -apikey $Env:NUGET_API_KEY
     - name: Release
-      uses: softprops/action-gh-release@v1
+      uses: softprops/action-gh-release@v2
       with:
         draft: true
         prerelease: ${{ contains(github.ref_name, '-') }}

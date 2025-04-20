@@ -122,7 +122,7 @@ public class Messenger : IMessenger
 
     private class Channel
     {
-        private readonly List<WeakReference<object>> _subscribers = new();
+        private readonly List<WeakReference<object>> _subscribers = [];
         private readonly ConditionalWeakTable<object, List<Delegate>> _callbacks = new();
 
         public void Subscribe(object subscriber, Delegate callback)
@@ -130,7 +130,7 @@ public class Messenger : IMessenger
             if (!_callbacks.TryGetValue(subscriber, out List<Delegate> callbacks))
             {
                 _subscribers.Add(new WeakReference<object>(subscriber));
-                _callbacks.Add(subscriber, callbacks = new List<Delegate>());
+                _callbacks.Add(subscriber, callbacks = []);
             }
 
             callbacks.Add(callback);

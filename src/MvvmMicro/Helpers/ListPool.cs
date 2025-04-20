@@ -18,7 +18,7 @@ internal class ListPool<T>
             }
         }
 
-        return new List<T>();
+        return [];
     }
 
     public void Return(List<T> list)
