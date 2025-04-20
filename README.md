@@ -32,7 +32,8 @@ Install-Package MvvmMicro
 | `RelayCommand`,<br/>`RelayCommand<T>` | An `ICommand` implementation based on a synchronous delegate for `Execute` and `CanExecute`. |
 | `AsyncRelayCommand`,<br/>`AsyncRelayCommand<T>` | An `ICommand` implementation based on an asynchronous delegate for `Execute` with cancellation support. |
 
-Also check out the [class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png).
+Also check out the [class diagram](src/MvvmMicro/Diagrams/ClassDiagram.png) and
+the [sample project](samples/MvvmMicro.Sample.Wpf).
 
 ## License
 
