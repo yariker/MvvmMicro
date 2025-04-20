@@ -1,35 +1,40 @@
 ﻿using System;
-using Autofac;
+using Microsoft.Extensions.DependencyInjection;
 using MvvmMicro.Sample.Wpf.Services;
 
 namespace MvvmMicro.Sample.Wpf.ViewModel;
 
 public sealed class ViewModelLocator : IDisposable
 {
-    private readonly IContainer _container;
+    private readonly ServiceProvider _container;
 
     public ViewModelLocator()
     {
-        var containerBuilder = new ContainerBuilder();
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection.AddHttpClient(CatFactFeed.HttpClientName)
+                         .AddStandardResilienceHandler();
+
+        serviceCollection.AddTransient<ICatFactFeed, CatFactFeed>();
 
         if (ViewModelBase.IsInDesignMode)
         {
             // Design-time services.
-            containerBuilder.RegisterType<Design.CatFactFeed>().As<ICatFactFeed>().SingleInstance();
+            serviceCollection.AddTransient<ICatFactFeed, Design.CatFactFeed>();
         }
         else
         {
             // Run-time services.
-            containerBuilder.RegisterType<CatFactFeed>().As<ICatFactFeed>().SingleInstance();
+            serviceCollection.AddTransient<ICatFactFeed, CatFactFeed>();
         }
 
-        containerBuilder.RegisterInstance(Messenger.Default).As<IMessenger>();
-        containerBuilder.RegisterType<MainViewModel>().AsSelf().SingleInstance();
+        serviceCollection.AddSingleton(Messenger.Default);
+        serviceCollection.AddSingleton<MainViewModel>();
 
-        _container = containerBuilder.Build();
+        _container = serviceCollection.BuildServiceProvider();
     }
 
-    public MainViewModel Main => _container.Resolve<MainViewModel>();
+    public MainViewModel Main => _container.GetRequiredService<MainViewModel>();
 
     /// <inheritdoc />
     public void Dispose()

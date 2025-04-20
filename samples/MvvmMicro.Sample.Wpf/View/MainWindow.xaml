@@ -47,7 +47,7 @@
             </Setter>
         </Style>
 
-        <DataTemplate x:Key="FactTemplate" DataType="{x:Type model:Fact}">
+        <DataTemplate x:Key="FactTemplate" DataType="{x:Type model:CatFact}">
             <DockPanel Height="180"
                        Margin="5"
                        Focusable="True"
@@ -73,7 +73,7 @@
                 <TextBlock Margin="5"
                            FontSize="20"
                            Foreground="White"
-                           Text="{Binding Text}"
+                           Text="{Binding Fact}"
                            TextTrimming="CharacterEllipsis"
                            TextWrapping="Wrap" />
             </DockPanel>
@@ -90,6 +90,7 @@
                       Style="{StaticResource ListBoxStyle}" />
         <StackPanel HorizontalAlignment="Center"
                     VerticalAlignment="Top"
+                    d:Visibility="Visible"
                     Background="#990000FF"
                     Orientation="Horizontal"
                     Visibility="{Binding Path=LoadCommand.IsExecuting, Converter={StaticResource BooleanToVisibilityConverter}}">

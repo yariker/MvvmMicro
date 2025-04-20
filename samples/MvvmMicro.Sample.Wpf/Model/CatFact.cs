@@ -3,11 +3,11 @@ using System.Windows.Media;
 
 namespace MvvmMicro.Sample.Wpf.Model;
 
-public class Fact
+public class CatFact
 {
-    public string Text { get; set; }
+    public string Fact { get; set; }
 
-    public DateTime UpdatedAt { get; set; }
+    public DateTime UpdatedAt { get; set; } = DateTime.Now;
 
     public ImageSource Picture { get; set; }
 }

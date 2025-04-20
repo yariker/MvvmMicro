@@ -21,6 +21,7 @@
     <PackageId>MvvmMicro</PackageId>
     <PackageIcon>icon.png</PackageIcon>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/yariker/MvvmMicro</PackageProjectUrl>
     <RepositoryUrl>https://github.com/yariker/MvvmMicro.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -43,6 +44,10 @@
 
   <ItemGroup>
     <AdditionalFiles Include="..\..\stylecop.json" Link="stylecop.json" />
+    <None Include="..\..\LICENSE" Link="LICENSE">
+      <Pack>true</Pack>
+      <PackagePath></PackagePath>
+    </None>
     <None Include="icon.png">
       <Pack>true</Pack>
       <PackagePath></PackagePath>

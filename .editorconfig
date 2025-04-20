@@ -1,5 +1,11 @@
 root = true
 
+[*.csproj]
+charset = utf-8-bom
+insert_final_newline = true
+indent_style = space
+indent_size = 2
+
 [*.cs]
 charset = utf-8-bom
 insert_final_newline = true
@@ -108,7 +114,10 @@ dotnet_diagnostic.sx1101.severity = warning
 dotnet_diagnostic.sx1309.severity = warning
 
 # SA1141: Use tuple syntax
-dotnet_diagnostic.SA1141.severity = none
+dotnet_diagnostic.sa1141.severity = none
 
 # SA0001: XML comment analysis disabled
-dotnet_diagnostic.SA0001.severity = none
+dotnet_diagnostic.sa0001.severity = none
+
+# ReSharper properties
+resharper_align_multiline_calls_chain = true

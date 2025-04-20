@@ -27,7 +27,7 @@ public class MainViewModel : ViewModelBase
         }
     }
 
-    public ObservableCollection<Fact> Facts { get; } = new();
+    public ObservableCollection<CatFact> Facts { get; } = [];
 
     /// <summary>
     /// Gets the command that loads more items into the <see cref="Facts"/> collection.
@@ -41,7 +41,7 @@ public class MainViewModel : ViewModelBase
 
     private bool CanLoad(ScrollChangedEventArgs e)
     {
-        // Execute the command only if the list is empty or it's scrolled all the way down.
+        // Execute the command only if the list is empty, or it's scrolled all the way down.
         return Facts.Count == 0 || e != null && Math.Round(e.VerticalOffset) >= Math.Round(e.ExtentHeight - e.ViewportHeight);
     }
 
@@ -49,11 +49,8 @@ public class MainViewModel : ViewModelBase
     {
         try
         {
-            var facts = await _catFactFeed.GetFactsAsync(5, cancellationToken);
-            foreach (var fact in facts)
-            {
-                Facts.Add(fact);
-            }
+            var facts = await _catFactFeed.GetFactsAsync(cancellationToken);
+            facts.ForEach(Facts.Add);
         }
         catch (OperationCanceledException)
         {

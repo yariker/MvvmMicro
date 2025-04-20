@@ -38,4 +38,4 @@ jobs:
       with:
         draft: true
         prerelease: ${{ contains(github.ref_name, '-') }}
-        files: package\*.nupkg
+        files: package/*.nupkg
